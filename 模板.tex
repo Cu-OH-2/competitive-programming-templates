@@ -1,0 +1,278 @@
+% 宏包与环境
+\documentclass[twocolumn,a4]{article}  %两栏，A4大小
+\usepackage{xeCJK} % 中文支持
+\usepackage{amsmath, amsthm}
+\usepackage{listings,xcolor}  %插入代码
+\usepackage{geometry} % 设置页边距
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{fancyhdr} % 自定义页眉页脚
+\setsansfont{Consolas} % 设置英文字体
+\setmonofont[Mapping={}]{Consolas} % 英文引号之类的正常显示，相当于设置英文字体
+\geometry{left=1cm,right=1cm,top=2cm,bottom=0.5cm} % 页边距
+\setlength{\columnsep}{30pt}  %两栏之间的间距大小
+\setlength\columnseprule{0.4pt} % 分割线
+
+% 页眉、页脚设置
+\pagestyle{fancy}
+\lhead{Cu\_OH\_2}
+\chead{\CJKfamily{hei} 算法竞赛个人模板}
+\rhead{\CJKfamily{hei} 第 \thepage 页}
+\lfoot{} 
+\cfoot{}
+\rfoot{}
+\renewcommand{\headrulewidth}{0.4pt} 
+\renewcommand{\footrulewidth}{0.4pt}
+
+% 代码格式设置
+\lstset
+{
+    language    = C++,
+    breaklines  = true,
+    captionpos  = b,
+    tabsize     = 4,
+    frame       = shadowbox,
+    columns     = fullflexible,
+    commentstyle = \color[RGB]{0,128,0},
+    keywordstyle = \color[RGB]{0,0,255},
+    basicstyle   = \scriptsize\ttfamily,
+    stringstyle  = \color[RGB]{148,0,209}\ttfamily,
+    rulesepcolor = \color{red!20!green!20!blue!20},
+    showstringspaces = false,
+}
+
+% 标题设置
+\title{\CJKfamily{hei} \bfseries 算法竞赛个人模板}
+\author{Cu\_OH\_2}
+\renewcommand{\today}{\number\year 年 \number\month 月 \number\day 日}
+
+\begin{document}
+	% 生成标题
+	\begin{titlepage}
+		\maketitle
+	\end{titlepage}
+	
+	% 生成目录
+	\newpage
+	\pagestyle{empty}
+	\renewcommand{\contentsname}{目录}
+	\tableofcontents
+	
+	% 初始准备
+	\newpage
+	\clearpage
+	\newpage
+	\pagestyle{fancy}
+	\setcounter{page}{1} %从当前页开始计算页数
+	
+	\section{常用}
+		\subsection{基础框架}
+			\lstinputlisting{常用/答题框架.cpp}
+			
+		\subsection{调试技巧}
+			\lstinputlisting{常用/调试技巧.cpp}
+			
+		\subsection{注意事项}
+		 	\lstinputlisting{常用/注意事项.cpp}
+			
+			
+	\section{动态规划}
+	 	\subsection{单调队列优化多重背包}
+	 	 	\lstinputlisting{动态规划/单调队列优化多重背包.cpp}
+	 	 	
+	 	\subsection{二进制分组优化多重背包}
+	 	 	\lstinputlisting{动态规划/二进制分组优化多重背包.cpp}
+	 	 	
+		\subsection{动态DP}
+	 	 	\lstinputlisting{动态规划/动态DP.cpp}
+	 	 	
+	\section{字符串}
+		\subsection{KMP算法}
+	 	 	\lstinputlisting{字符串/KMP算法.cpp}
+	 	
+		\subsection{扩展KMP算法}
+	 	 	\lstinputlisting{字符串/扩展KMP算法.cpp}
+	
+	 	 \subsection{字典树}
+	 	 	\lstinputlisting{字符串/字典树.cpp}
+	 	 	
+		\subsection{AC自动机}
+	 	 	\lstinputlisting{字符串/AC自动机.cpp}
+	 	 	
+		\subsection{后缀自动机}
+	 	 	\lstinputlisting{字符串/后缀自动机.cpp}	
+	 	 	
+		\subsection{回文自动机}
+	 	 	\lstinputlisting{字符串/回文自动机.cpp}	
+	 	 	
+		\subsection{Manacher算法}
+	 	 	\lstinputlisting{字符串/Manacher算法.cpp}	
+	 	 	
+		\subsection{最小表示法}
+	 	 	\lstinputlisting{字符串/最小表示法.cpp}	
+	 	 	
+		\subsection{字符串哈希}
+			\lstinputlisting{字符串/字符串哈希.cpp}
+	 	 	
+	\section{数学}
+		\subsection{快速幂}
+	 	 	\lstinputlisting{数学/快速幂.cpp}
+	 	 	
+		\subsection{矩阵快速幂}
+	 	 	\lstinputlisting{数学/矩阵快速幂.cpp}
+	 	 	
+		\subsection{排列奇偶性}
+	 	 	\lstinputlisting{数学/排列奇偶性.cpp}
+	 	 	
+		\subsection{组合数递推}
+	 	 	\lstinputlisting{数学/组合数递推.cpp}
+
+		\subsection{线性基}
+	 	 	\lstinputlisting{数学/线性基.cpp}
+
+	 	\subsection{高精度}
+	 	 	\lstinputlisting{数学/高精度.cpp}
+	 	 	
+	 	\subsection{连续乘法逆元}
+	 	 	\lstinputlisting{数学/连续乘法逆元.cpp}
+	
+	 	\subsection{数论分块}
+	 	 	\lstinputlisting{数学/数论分块.cpp}
+	
+	 	\subsection{欧拉函数}
+	 	 	\lstinputlisting{数学/欧拉函数.cpp}
+	
+	 	\subsection{线性素数筛}
+	 	 	\lstinputlisting{数学/线性素数筛.cpp}
+
+	 	\subsection{欧几里得算法+扩展欧几里得算法}
+	 	 	\lstinputlisting{数学/欧几里得算法+扩展欧几里得算法.cpp}
+	
+	 	\subsection{哥德巴赫猜想}
+	 	 	\lstinputlisting{数学/哥德巴赫猜想.cpp}
+	
+	\section{数据结构}
+		\subsection{哈希表}
+			\lstinputlisting{数据结构/哈希表.cpp}
+			
+		\subsection{ST表}
+	 	 	\lstinputlisting{数据结构/ST表.cpp}
+	 	 	
+	 	\subsection{并查集}
+	 	 	\lstinputlisting{数据结构/并查集.cpp}
+
+	 	\subsection{树状数组}
+	 	 	\lstinputlisting{数据结构/树状数组.cpp}
+	 	 	
+	 	\subsection{二维树状数组}
+	 	 	\lstinputlisting{数据结构/二维树状数组.cpp}
+	 	 	
+	 	\subsection{线段树}
+	 	 	\lstinputlisting{数据结构/线段树.cpp}
+	 	 	
+		\subsection{可持久化线段树}
+	 	 	\lstinputlisting{数据结构/可持久化线段树.cpp}
+	 	 	
+		\subsection{李超线段树}
+			\lstinputlisting{数据结构/李超线段树.cpp}
+	 	 	
+	\section{树论}
+		\subsection{LCA}
+	 	 	\lstinputlisting{树论/LCA.cpp}
+	 	 	
+		\subsection{树的直径}
+	 	 	\lstinputlisting{树论/树的直径.cpp}
+	 	 	
+		\subsection{树哈希}
+	 	 	\lstinputlisting{树论/树哈希.cpp}
+	 	 	
+		\subsection{树链剖分}
+	 	 	\lstinputlisting{树论/树链剖分.cpp}
+	 	 	
+		\subsection{树上启发式合并}
+	 	 	\lstinputlisting{树论/树上启发式合并.cpp}
+	 	 	
+		\subsection{点分治}
+			\lstinputlisting{树论/点分治.cpp}
+	 	 	
+	\section{图论}
+		\subsection{2-SAT}
+	 	 	\lstinputlisting{图论/2-SAT.cpp}
+
+		\subsection{Bellman-Ford算法}
+	 	 	\lstinputlisting{图论/Bellman-Ford算法.cpp}
+	 	 	
+		\subsection{Dijkstra算法}
+	 	 	\lstinputlisting{图论/Dijkstra算法.cpp}
+	 	 	
+		\subsection{Dinic算法}
+	 	 	\lstinputlisting{图论/Dinic算法.cpp}
+	 	 	
+		\subsection{Floyd算法}
+	 	 	\lstinputlisting{图论/Floyd算法.cpp}
+	 	 	
+		\subsection{Kosaraju算法}
+	 	 	\lstinputlisting{图论/Kosaraju算法.cpp}
+	 	 	
+	 	\subsection{Tarjan算法}
+	 	 	\lstinputlisting{图论/Tarjan算法.cpp}
+	 	 	
+		\subsection{K短路}
+	 	 	\lstinputlisting{图论/K短路.cpp}
+	 	 	
+		\subsection{SSP算法}
+	 	 	\lstinputlisting{图论/SSP算法.cpp}
+	 	 	
+		\subsection{原始对偶算法}
+	 	 	\lstinputlisting{图论/原始对偶算法.cpp}
+	 	 	
+		\subsection{Prim算法}
+	 	 	\lstinputlisting{图论/Prim算法.cpp}
+	 	 	
+		\subsection{Kruskal算法}
+	 	 	\lstinputlisting{图论/Kruskal算法.cpp}
+	 	 	
+		\subsection{Kruskal重构树}
+	 	 	\lstinputlisting{图论/Kruskal重构树.cpp}
+	 	 	
+	\section{计算几何}
+		\subsection{平面坐标旋转}
+	 	 	\lstinputlisting{计算几何/平面坐标旋转.cpp}
+	
+	\section{杂项算法}
+		\subsection{普通莫队算法}
+	 	 	\lstinputlisting{杂项算法/普通莫队算法.cpp}
+	 	 	
+	 	\subsection{带修改莫队算法}
+	 	 	\lstinputlisting{杂项算法/带修改莫队算法.cpp}
+	 	 	
+	 	\subsection{整体二分}
+	 	 	\lstinputlisting{杂项算法/整体二分.cpp}
+	 	 	
+	 	\subsection{离散化}
+	 	 	\lstinputlisting{杂项算法/离散化.cpp}
+	 	 	
+	 	\subsection{快速排序}
+	 	 	\lstinputlisting{杂项算法/快速排序.cpp}
+	 	 	
+ 	 	\subsection{枚举集合}
+	 	 	\lstinputlisting{杂项算法/枚举集合.cpp}
+	 	 	
+	 	\subsection{CDQ分治+CDQ分治=多维偏序}
+	 	 	\lstinputlisting{杂项算法/CDQ分治+CDQ分治=多维偏序.cpp}
+
+		\subsection{CDQ分治+数据结构=多维偏序}
+	 	 	\lstinputlisting{杂项算法/CDQ分治+数据结构=多维偏序.cpp}
+	
+	\section{博弈论}
+		\subsection{Fibonacci博弈}
+	 	 	\lstinputlisting{博弈论/Fibonacci博弈.cpp}
+	 	 	
+		\subsection{Wythoff博弈}
+	 	 	\lstinputlisting{博弈论/Wythoff博弈.cpp}
+	 	 	
+		\subsection{Green Hackenbush博弈}
+	 	 	\lstinputlisting{博弈论/Green Hackenbush博弈.cpp}
+
+
+\end{document}
