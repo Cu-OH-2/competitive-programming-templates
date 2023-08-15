@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.2.6)  10 AUG 2023 21:51
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.2.6)  15 AUG 2023 18:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -594,42 +594,42 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 (./数学/连续乘法逆元.cpp) (./数学/数论分块.cpp [7]) (./数学/欧拉函数.cpp) (./数学/线性素数筛.cpp)
 (./数学/欧几里得算法+扩展欧几里得算法.cpp) (./数学/哥德巴赫猜想.cpp) (./数据结构/哈希表.cpp [8])
 (./数据结构/ST表.cpp) (./数据结构/并查集.cpp) (./数据结构/树状数组.cpp) [9] (./数据结构/二维树状数组.cpp)
-(./数据结构/线段树.cpp
+(./数据结构/线段树.cpp)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [10])
-(./数据结构/可持久化线段树.cpp) (./数据结构/李超线段树.cpp [11]) (./树论/LCA.cpp) (./树论/树的直径.cpp
-[12]) (./树论/树哈希.cpp) (./树论/树链剖分.cpp [13]) (./树论/树上启发式合并.cpp) (./树论/点分治.cpp
-[14])
+ [10]
+(./数据结构/动态开点线段树.cpp) (./数据结构/可持久化线段树.cpp
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-(./图论/2-SAT.cpp [15]) (./图论/Bellman-Ford算法.cpp) (./图论/Dijkstra算法.cpp [16])
-(./图论/Dinic算法.cpp) (./图论/Floyd算法.cpp [17]) (./图论/Kosaraju算法.cpp)
-(./图论/Tarjan算法.cpp) (./图论/K短路.cpp [18]) (./图论/SSP算法.cpp
+ [11])
+(./数据结构/李超线段树.cpp) (./树论/LCA.cpp [12]) (./树论/树的直径.cpp) (./树论/树哈希.cpp [13])
+(./树论/树链剖分.cpp) (./树论/树上启发式合并.cpp [14]) (./树论/点分治.cpp) (./图论/2-SAT.cpp [15]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [19])
-(./图论/原始对偶算法.cpp)
+)
+(./图论/Bellman-Ford算法.cpp) (./图论/Dijkstra算法.cpp [16]) (./图论/Dinic算法.cpp
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [20]
-(./图论/Prim算法.cpp) (./图论/Kruskal算法.cpp) (./图论/Kruskal重构树.cpp [21])
-(./计算几何/平面坐标旋转.cpp) (./杂项算法/普通莫队算法.cpp) [22] (./杂项算法/带修改莫队算法.cpp)
-(./杂项算法/整体二分.cpp [23]) (./杂项算法/离散化.cpp) (./杂项算法/快速排序.cpp) (./杂项算法/枚举集合.cpp)
-(./杂项算法/CDQ分治+CDQ分治=多维偏序.cpp [24]) (./杂项算法/CDQ分治+数据结构=多维偏序.cpp)
+ [17])
+(./图论/Floyd算法.cpp) (./图论/Kosaraju算法.cpp) (./图论/Tarjan算法.cpp [18]) (./图论/K短路.cpp
+) (./图论/SSP算法.cpp [19]) (./图论/原始对偶算法.cpp
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25]
+ [20])
+(./图论/Prim算法.cpp) (./图论/Kruskal算法.cpp) (./图论/Kruskal重构树.cpp [21]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+)
+(./计算几何/平面坐标旋转.cpp) (./杂项算法/普通莫队算法.cpp [22]) (./杂项算法/带修改莫队算法.cpp) [23]
+(./杂项算法/整体二分.cpp) (./杂项算法/离散化.cpp) (./杂项算法/快速排序.cpp) (./杂项算法/枚举集合.cpp [24])
+(./杂项算法/CDQ分治+CDQ分治=多维偏序.cpp) (./杂项算法/CDQ分治+数据结构=多维偏序.cpp [25])
 (./博弈论/Fibonacci博弈.cpp) (./博弈论/Wythoff博弈.cpp) (./博弈论/Green Hackenbush博弈.cpp)
-[26
-
-] (./模板.aux) ) 
+[26] (./模板.aux) ) 
 Here is how much of TeX's memory you used:
- 9344 strings out of 476919
- 206005 string characters out of 5825425
- 1922951 words of memory out of 5000000
- 29019 multiletter control sequences out of 15000+600000
+ 9351 strings out of 476919
+ 206649 string characters out of 5825425
+ 1867951 words of memory out of 5000000
+ 29023 multiletter control sequences out of 15000+600000
  407606 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  82i,12n,88p,296b,1691s stack positions out of 5000i,500n,10000p,200000b,80000s
