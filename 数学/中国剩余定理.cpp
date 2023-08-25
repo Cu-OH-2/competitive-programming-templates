@@ -2,20 +2,19 @@
 * 时间复杂度：O(nlogn)
 * 说明：
 * 1.中国剩余定理，解线性同余方程组，总有唯一解
-* 2.爆longlong时可能需要快速乘（模数过大时可能爆精度）
+* 2.爆longlong时可能需要快速乘（模数过大也可能爆精度）
 *******************************************************************/
-ll qmul(ll a, ll b, ll mod)
-{
-	//a = (a % mod + mod) % mod; 
-	//b = (b % mod + mod) % mod;
-	ll res = a * b - (ll)((ld)a / mod * b + 1e-8) * mod; 
-	return res < 0 ? res + mod : res;  
-}
-
 struct CRT
 {
     vector<pair<ll, ll>> f;
     inline ll norm(ll x, ll mod) { return (x % mod + mod) % mod; }
+    ll qmul(ll a, ll b, ll mod)
+    {
+        //a = norm(a, mod);
+        //b = norm(b, mod);
+        ll res = a * b - (ll)((ld)a / mod * b + 1e-8) * mod;
+        return norm(res, mod);
+    }
     ll exgcd(ll a, ll b, ll& x, ll& y)
     {
         if (b == 0)
