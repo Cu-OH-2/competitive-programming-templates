@@ -1,7 +1,7 @@
 /*******************************************************************
 * 时间复杂度：O(nlogn)
 * 说明：
-* 1.中国剩余定理，解线性同余方程组，总有唯一解
+* 1.解模数互质的线性同余方程组，一定有解
 * 2.爆longlong时可能需要快速乘（模数过大也可能爆精度）
 *******************************************************************/
 struct CRT
@@ -33,12 +33,12 @@ struct CRT
         exgcd(a, mod, x, y);
         return norm(x, mod);
     }
-    void insert(int r, int m)
+    void insert(ll r, ll m)
     {
         f.push_back({ r, m });
         return;
     }
-    ll solve()
+    ll work()
     {
         ll mul = 1, ans = 0;
         for (auto e : f) mul *= e.second;
