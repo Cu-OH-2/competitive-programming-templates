@@ -18,14 +18,14 @@ __lg(x);
 //long double 用浮点函数后面加l
 sqrtl(x)/fabsl(x)/cosl(x);
 
-// 随机数生成器（C++11，返回unsigned_int）
+//随机数生成器（C++11，返回unsigned_int）
 mt19937 mt(time(0));
 mt();
 shuffle(v.begin(), v.end(), mt);
 
-// 读入包含空格的一行字符串
+//读入包含空格的一行字符串
 getline(cin, str);
 
-// 优先队列自定义比较函数
+//优先队列自定义比较函数
 priority_queue<T, vector<T>, decltype(cmp)> pq1(cmp); // lambda函数
 priority_queue<T, vector<T>, decltype(&cmp)> pq1(cmp); // 普通函数
