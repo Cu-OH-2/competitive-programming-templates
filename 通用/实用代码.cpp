@@ -22,3 +22,6 @@ sqrtl(x)/fabsl(x)/cosl(x);
 mt19937 mt(time(0));
 mt();
 shuffle(v.begin(), v.end(), mt);
+
+// 读入包含空格的一行字符串
+getline(cin, str);
