@@ -25,3 +25,7 @@ shuffle(v.begin(), v.end(), mt);
 
 // 读入包含空格的一行字符串
 getline(cin, str);
+
+// 优先队列自定义比较函数
+priority_queue<T, vector<T>, decltype(cmp)> pq1(cmp); // lambda函数
+priority_queue<T, vector<T>, decltype(&cmp)> pq1(cmp); // 普通函数
