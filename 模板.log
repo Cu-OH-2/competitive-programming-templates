@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.2.6)  14 SEP 2023 00:54
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.2.6)  14 SEP 2023 19:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -587,54 +587,53 @@ Package fontspec Info: Font family 'FandolFang-Regular(0)' created for font
 Underfull \vbox (badness 3291) has occurred while \output is active []
 
  [5]
-(./数学/快速幂.cpp) (./数学/矩阵快速幂.cpp) (./数学/排列奇偶性.cpp) (./数学/组合数递推.cpp) (./数学/线性基.cpp
-[6]) (./数学/高精度.cpp
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [7])
-(./数学/连续乘法逆元.cpp) (./数学/数论分块.cpp) (./数学/欧拉函数.cpp) (./数学/线性素数筛.cpp)
-(./数学/欧几里得算法+扩展欧几里得算法.cpp) [8] (./数学/中国剩余定理.cpp) (./数学/扩展中国剩余定理.cpp)
-(./数学/哥德巴赫猜想.cpp) (./数据结构/哈希表.cpp [9]) (./数据结构/ST表.cpp) (./数据结构/并查集.cpp)
-(./数据结构/笛卡尔树.cpp) (./数据结构/树状数组.cpp [10]) (./数据结构/二维树状数组.cpp) (./数据结构/线段树.cpp
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [11])
-(./数据结构/历史最值线段树.cpp) (./数据结构/动态开点线段树.cpp [12]) (./数据结构/可持久化线段树.cpp)
-(./数据结构/李超线段树.cpp [13])
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-(./树论/LCA.cpp) (./树论/树的直径.cpp [14]) (./树论/树哈希.cpp) (./树论/树链剖分.cpp [15])
-(./树论/树上启发式合并.cpp)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [16]
-(./树论/点分治.cpp) (./图论/2-SAT.cpp [17]) (./图论/Bellman-Ford算法.cpp)
-(./图论/Dijkstra算法.cpp [18]) (./图论/Dinic算法.cpp) (./图论/Floyd算法.cpp [19])
-(./图论/Kosaraju算法.cpp) (./图论/Tarjan算法.cpp [20]) (./图论/K短路.cpp) (./图论/SSP算法.cpp
-[21]) (./图论/原始对偶算法.cpp
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [22])
-(./图论/Prim算法.cpp) (./图论/Kruskal算法.cpp) (./图论/Kruskal重构树.cpp [23])
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-(./计算几何/平面坐标旋转.cpp) (./杂项算法/普通莫队算法.cpp [24]) (./杂项算法/带修改莫队算法.cpp)
-(./杂项算法/整体二分.cpp [25]) (./杂项算法/离散化.cpp) (./杂项算法/快速排序.cpp) (./杂项算法/枚举集合.cpp)
-(./杂项算法/CDQ分治+CDQ分治=多维偏序.cpp [26]
+(./数学/快速幂.cpp) (./数学/矩阵快速幂.cpp) (./数学/矩阵求逆.cpp [6]) (./数学/排列奇偶性.cpp)
+(./数学/组合数递推.cpp) (./数学/线性基.cpp) (./数学/高精度.cpp [7]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 )
-(./杂项算法/CDQ分治+数据结构=多维偏序.cpp [27]) (./博弈论/Fibonacci博弈.cpp) (./博弈论/Wythoff博弈.cpp)
-(./博弈论/Green Hackenbush博弈.cpp) [28] (./模板.aux) ) 
+(./数学/连续乘法逆元.cpp) (./数学/数论分块.cpp) (./数学/欧拉函数.cpp [8]) (./数学/线性素数筛.cpp)
+(./数学/欧几里得算法+扩展欧几里得算法.cpp) (./数学/中国剩余定理.cpp) (./数学/扩展中国剩余定理.cpp [9])
+(./数学/哥德巴赫猜想.cpp) (./数据结构/哈希表.cpp) (./数据结构/ST表.cpp) (./数据结构/并查集.cpp [10])
+(./数据结构/笛卡尔树.cpp) (./数据结构/树状数组.cpp) (./数据结构/二维树状数组.cpp [11]) (./数据结构/线段树.cpp)
+(./数据结构/历史最值线段树.cpp [12]) (./数据结构/动态开点线段树.cpp) (./数据结构/可持久化线段树.cpp [13])
+(./数据结构/李超线段树.cpp
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [14])
+(./树论/LCA.cpp) (./树论/树的直径.cpp) (./树论/树哈希.cpp [15]) (./树论/树链剖分.cpp)
+(./树论/树上启发式合并.cpp [16]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+)
+(./树论/点分治.cpp [17]) (./图论/2-SAT.cpp) (./图论/Bellman-Ford算法.cpp [18])
+(./图论/Dijkstra算法.cpp) (./图论/Dinic算法.cpp [19]) (./图论/Floyd算法.cpp)
+(./图论/Kosaraju算法.cpp [20]) (./图论/Tarjan算法.cpp) (./图论/K短路.cpp [21])
+(./图论/SSP算法.cpp) (./图论/原始对偶算法.cpp [22]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+)
+(./图论/Prim算法.cpp [23]) (./图论/Kruskal算法.cpp) (./图论/Kruskal重构树.cpp
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [24])
+(./计算几何/平面坐标旋转.cpp) (./杂项算法/普通莫队算法.cpp) (./杂项算法/带修改莫队算法.cpp [25])
+(./杂项算法/整体二分.cpp) (./杂项算法/离散化.cpp) [26] (./杂项算法/快速排序.cpp) (./杂项算法/枚举集合.cpp)
+(./杂项算法/CDQ分治+CDQ分治=多维偏序.cpp
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [27])
+(./杂项算法/CDQ分治+数据结构=多维偏序.cpp) (./博弈论/Fibonacci博弈.cpp) (./博弈论/Wythoff博弈.cpp)
+[28] (./博弈论/Green Hackenbush博弈.cpp) [29
+
+] (./模板.aux) ) 
 Here is how much of TeX's memory you used:
- 9427 strings out of 476919
- 207561 string characters out of 5825425
- 1962951 words of memory out of 5000000
- 29087 multiletter control sequences out of 15000+600000
+ 9437 strings out of 476919
+ 207654 string characters out of 5825425
+ 1925951 words of memory out of 5000000
+ 29094 multiletter control sequences out of 15000+600000
  407606 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 82i,12n,88p,296b,1701s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 82i,12n,88p,296b,1703s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on 模板.pdf (30 pages).
+Output written on 模板.pdf (31 pages).
