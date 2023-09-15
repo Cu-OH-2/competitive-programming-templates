@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.2.6)  14 SEP 2023 19:38
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.2.6)  15 SEP 2023 19:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -608,32 +608,32 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 )
 (./树论/点分治.cpp [17]) (./图论/2-SAT.cpp) (./图论/Bellman-Ford算法.cpp [18])
 (./图论/Dijkstra算法.cpp) (./图论/Dinic算法.cpp [19]) (./图论/Floyd算法.cpp)
-(./图论/Kosaraju算法.cpp [20]) (./图论/Tarjan算法.cpp) (./图论/K短路.cpp [21])
-(./图论/SSP算法.cpp) (./图论/原始对偶算法.cpp [22]
+(./图论/Kosaraju算法.cpp [20]) (./图论/Tarjan算法.cpp
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [21])
+(./图论/圆方树.cpp) (./图论/K短路.cpp [22]) (./图论/SSP算法.cpp) (./图论/原始对偶算法.cpp [23]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 )
-(./图论/Prim算法.cpp [23]) (./图论/Kruskal算法.cpp) (./图论/Kruskal重构树.cpp
+(./图论/Prim算法.cpp [24]) (./图论/Kruskal算法.cpp) (./图论/Kruskal重构树.cpp
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [24])
-(./计算几何/平面坐标旋转.cpp) (./杂项算法/普通莫队算法.cpp) (./杂项算法/带修改莫队算法.cpp [25])
-(./杂项算法/整体二分.cpp) (./杂项算法/离散化.cpp) [26] (./杂项算法/快速排序.cpp) (./杂项算法/枚举集合.cpp)
-(./杂项算法/CDQ分治+CDQ分治=多维偏序.cpp
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [27])
-(./杂项算法/CDQ分治+数据结构=多维偏序.cpp) (./博弈论/Fibonacci博弈.cpp) (./博弈论/Wythoff博弈.cpp)
-[28] (./博弈论/Green Hackenbush博弈.cpp) [29
+ [25])
+(./计算几何/平面坐标旋转.cpp) (./杂项算法/普通莫队算法.cpp) (./杂项算法/带修改莫队算法.cpp [26])
+(./杂项算法/整体二分.cpp) (./杂项算法/离散化.cpp [27]) (./杂项算法/快速排序.cpp) (./杂项算法/枚举集合.cpp)
+(./杂项算法/CDQ分治+CDQ分治=多维偏序.cpp [28]) (./杂项算法/CDQ分治+数据结构=多维偏序.cpp)
+(./博弈论/Fibonacci博弈.cpp) (./博弈论/Wythoff博弈.cpp [29])
+(./博弈论/Green Hackenbush博弈.cpp) [30
 
 ] (./模板.aux) ) 
 Here is how much of TeX's memory you used:
- 9437 strings out of 476919
- 207654 string characters out of 5825425
+ 9453 strings out of 476919
+ 207813 string characters out of 5825425
  1925951 words of memory out of 5000000
- 29094 multiletter control sequences out of 15000+600000
+ 29107 multiletter control sequences out of 15000+600000
  407606 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 82i,12n,88p,296b,1703s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 82i,12n,88p,296b,1705s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on 模板.pdf (31 pages).
+Output written on 模板.pdf (32 pages).
