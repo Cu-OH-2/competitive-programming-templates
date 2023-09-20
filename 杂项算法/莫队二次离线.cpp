@@ -10,7 +10,7 @@ ll a[N], BLOCK;
 
 struct Q
 {
-    ll l, r, id, ans = 0;
+    ll l, r, id, ans;
     bool operator<(const Q& rhs) const
     {
         int lb = l / BLOCK, rb = rhs.l / BLOCK;
@@ -28,9 +28,15 @@ void solve()
     cin >> n >> m >> k;
     BLOCK = sqrt(n);
     for (int i = 1; i <= n; ++i) cin >> a[i];
-    for (int i = 1; i <= m; ++i) cin >> q[i].l >> q[i].r, q[i].id = i;
+    for (int i = 1; i <= m; ++i)
+    {
+        cin >> q[i].l >> q[i].r;
+        q[i].id = i;
+        q[i].ans = 0;
+    }
     sort(q + 1, q + 1 + m);
-    int lef = q[0].l = 1, rig = q[0].r = 0;
+    q[0].l = 1, q[0].r = 0, q[0].ans = 0;
+    int lef = 1, rig = 0;
     array<vector<vector<int>>, 2> req{ vector<vector<int>>(n + 1), vector<vector<int>>(n + 1) };
     for (int i = 1; i <= m; ++i)
     {
