@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.2.6)  19 SEP 2023 22:11
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.2.6)  23 SEP 2023 20:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -583,11 +583,7 @@ Package fontspec Info: Font family 'FandolFang-Regular(0)' created for font
 ]) (./动态规划/动态DP.cpp) (./字符串/KMP算法.cpp) [2]
 (./字符串/扩展KMP算法.cpp) (./字符串/字典树.cpp) (./字符串/AC自动机.cpp [3]) (./字符串/后缀自动机.cpp)
 (./字符串/回文自动机.cpp [4]) (./字符串/Manacher算法.cpp) (./字符串/最小表示法.cpp) (./字符串/字符串哈希.cpp
-)
-Underfull \vbox (badness 3291) has occurred while \output is active []
-
- [5]
-(./数学/快速幂.cpp) (./数学/矩阵快速幂.cpp) (./数学/矩阵求逆.cpp [6]) (./数学/排列奇偶性.cpp)
+) [5] (./数学/快速幂.cpp) (./数学/矩阵快速幂.cpp) (./数学/矩阵求逆.cpp [6]) (./数学/排列奇偶性.cpp)
 (./数学/组合数递推.cpp) (./数学/线性基.cpp) (./数学/高精度.cpp [7]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -621,17 +617,25 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [25])
 (./计算几何/平面坐标旋转.cpp) (./杂项算法/普通莫队算法.cpp) (./杂项算法/带修改莫队算法.cpp [26])
-(./杂项算法/莫队二次离线.cpp) [27] (./杂项算法/整体二分.cpp) (./杂项算法/离散化.cpp) (./杂项算法/快速排序.cpp)
-(./杂项算法/枚举集合.cpp [28]) (./杂项算法/CDQ分治+CDQ分治=多维偏序.cpp)
-(./杂项算法/CDQ分治+数据结构=多维偏序.cpp [29]) (./博弈论/Fibonacci博弈.cpp) (./博弈论/Wythoff博弈.cpp)
-(./博弈论/Green Hackenbush博弈.cpp) [30] (./模板.aux) ) 
+(./杂项算法/莫队二次离线.cpp)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [27]
+(./杂项算法/整体二分.cpp) (./杂项算法/三分.cpp) (./杂项算法/离散化.cpp) (./杂项算法/快速排序.cpp [28])
+(./杂项算法/枚举集合.cpp) (./杂项算法/CDQ分治+CDQ分治=多维偏序.cpp) (./杂项算法/CDQ分治+数据结构=多维偏序.cpp
+[29]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+)
+(./博弈论/Fibonacci博弈.cpp) (./博弈论/Wythoff博弈.cpp) (./博弈论/Green Hackenbush博弈.cpp)
+[30] (./模板.aux) ) 
 Here is how much of TeX's memory you used:
- 9463 strings out of 476919
- 207916 string characters out of 5825425
- 1953951 words of memory out of 5000000
- 29114 multiletter control sequences out of 15000+600000
+ 9479 strings out of 476919
+ 208061 string characters out of 5825425
+ 1965951 words of memory out of 5000000
+ 29127 multiletter control sequences out of 15000+600000
  407606 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 82i,12n,88p,296b,1703s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 82i,12n,88p,296b,1705s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on 模板.pdf (32 pages).
