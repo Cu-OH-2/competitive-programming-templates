@@ -84,7 +84,7 @@ struct SegTree
             tree[src].val = val;
             return;
         }
-        if (p <= tree[src << 1].rig) assign(src << 1, pos, val);
+        if (pos <= tree[src << 1].rig) assign(src << 1, pos, val);
         else assign(src << 1 | 1, pos, val);
         update(src);
         return;
