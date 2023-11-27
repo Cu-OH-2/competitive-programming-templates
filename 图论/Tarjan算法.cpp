@@ -59,6 +59,7 @@ struct SCC
     }
     void rebuild()
     {
+        g.resize(cnt + 1);
         for (int i = 1; i <= sz; ++i)
         {
             for (auto e : node[i])
