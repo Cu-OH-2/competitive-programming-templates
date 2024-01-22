@@ -18,9 +18,11 @@ __lg(x);
 //long double 用浮点函数后面加l
 sqrtl(x)/fabsl(x)/cosl(x);
 
-//随机数生成器（C++11，返回unsigned_int）
+//随机数生成器（C++11，返回unsigned/ull）
 mt19937 mt(time(0));
+mt19937_64 mt64(time(0));
 mt();
+mt64();
 shuffle(v.begin(), v.end(), mt);
 
 //读入包含空格的一行字符串
