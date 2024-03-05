@@ -9,7 +9,7 @@ freopen("A.out", "w", stdout);
 __builtin_ffs(x); //最低位1是第几位（从1开始，不存在则0）
 __builtin_clz(x)/__builtin_clzll(x); //前导高0的个数
 __builtin_ctz(x)/__builtin_ctzll(x); //末尾低0的个数
-__builtin_popcount(x); //1的个数
+__builtin_popcount(x)/__builtin_popcountll(x); //1的个数
 __builtin_parity(x); //1的个数的奇偶性
 
 //最高位 1 的位置（从0开始，注意x不能为0）
