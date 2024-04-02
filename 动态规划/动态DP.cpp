@@ -1,8 +1,10 @@
 /*******************************************************************
 * 时间复杂度: O(qlogn)
-* 说明: 将dp转移方程表示为矩阵乘法，用线段树维护矩阵，实现带修改dp。
+* 说明:
+* 1. 以CF1814E为例。
+* 2. 如果转移只涉及相邻两个位置，可以尝试将转移方程表示为矩阵乘法。
+* 3. 由于矩阵乘法满足结合律，可以用线段树维护，实现动态带修改。
 *******************************************************************/
-//CF1814E
 const int N = 200005;
 const ll INFLL = 0x3f3f3f3f3f3f3f3f;
 
@@ -15,32 +17,26 @@ struct SegTree
     };
     vector<Node> tree;
 
-    inline int ls(int src) { return src * 2; }
-    inline int rs(int src) { return src * 2 + 1; }
-    inline Node& ln(int src) { return tree[ls(src)]; }
-    inline Node& rn(int src) { return tree[rs(src)]; }
-
-    inline void update(int src)
+    void update(int src)
     {
         for (int i = 0; i < 2; ++i)
         {
             for (int j = 0; j < 2; ++j)
             {
-                auto v1 = ln(src).mat[i][1] + rn(src).mat[1][j];
-                auto v2 = ln(src).mat[i][0] + rn(src).mat[1][j];
-                auto v3 = ln(src).mat[i][1] + rn(src).mat[0][j];
+                auto v1 = tree[src << 1].mat[i][1] + tree[src << 1 | 1].mat[1][j];
+                auto v2 = tree[src << 1].mat[i][0] + tree[src << 1 | 1].mat[1][j];
+                auto v3 = tree[src << 1].mat[i][1] + tree[src << 1 | 1].mat[0][j];
                 tree[src].mat[i][j] = min({ v1, v2, v3 });
             }
         }
         return;
     }
 
-    inline void calc(int src, ll val)
+    void settle(int src, ll val)
     {
         tree[src].mat[1][1] = val;
         tree[src].mat[0][0] = 0;
         tree[src].mat[0][1] = tree[src].mat[1][0] = INFLL;
-        return;
     }
 
     SegTree(int x) { tree.resize(x * 4 + 1); }
@@ -51,12 +47,12 @@ struct SegTree
         tree[src].rig = rig;
         if (lef == rig)
         {
-            calc(src, arr[lef]);
+            settle(src, arr[lef]);
             return;
         }
-        int mid = lef + rig >> 1;
-        build(ls(src), lef, mid, arr);
-        build(rs(src), mid + 1, rig, arr);
+        int mid = lef + (rig - lef) / 2;
+        build(src << 1, lef, mid, arr);
+        build(src << 1 | 1, mid + 1, rig, arr);
         update(src);
         return;
     }
@@ -65,12 +61,12 @@ struct SegTree
     {
         if (tree[src].lef == tree[src].rig)
         {
-            calc(src, val);
+            settle(src, val);
             return;
         }
-        int mid = tree[src].lef + tree[src].rig >> 1;
-        if (pos <= mid) modify(ls(src), pos, val);
-        else modify(rs(src), pos, val);
+        int mid = tree[src].lef + (tree[src].rig - tree[src].lef) / 2;
+        if (pos <= mid) modify(src << 1, pos, val);
+        else modify(src << 1 | 1, pos, val);
         update(src);
         return;
     }
