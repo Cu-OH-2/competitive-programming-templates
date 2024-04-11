@@ -9,14 +9,10 @@ struct Fenwick2
 
     inline int lowbit(int x) { return x & -x; }
 
-    Fenwick2() {}
-    Fenwick2(int x) { init(x); }
-
-    void init(int x)
-    {
+    Fenwick2(int x)
+    { 
         sz = x;
         tree.resize(sz + 1, vector<ll>(sz + 1));
-        return;
     }
 
     void add(int x, int y, ll val)

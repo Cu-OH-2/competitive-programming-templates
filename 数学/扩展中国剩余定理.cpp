@@ -49,8 +49,8 @@ struct ExCRT
             f.pop_back();
 
             // n % m1 = r1, n % m2 = r2
-            // n = x * m1 + r1 = y * m2 + r2
-            // x * m1 - y * m2 = r2 - r1
+            // => n = x * m1 + r1 = y * m2 + r2
+            // => x * m1 - y * m2 = r2 - r1
             ll g = exgcd(f1.second, f2.second, x, y);
             ll c = f2.first - f1.first;
             if (c % g) return { -1, -1 }; // 无解

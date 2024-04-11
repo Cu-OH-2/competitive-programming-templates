@@ -12,7 +12,7 @@ struct Trie
     vector<int> tag;
     //vector<vector<int>> out;
 
-    inline int F(char c) { return c - 'a'; }
+    int F(char c) { return c - 'a'; }
 
     Trie() { init(); }
 

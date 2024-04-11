@@ -11,7 +11,6 @@ struct SegTree
     };
     vector<Node> tree;
 
-    SegTree() {}
     SegTree(int x) { tree.resize(x * 4 + 1); }
 
     // 由子节点及其标记更新父节点

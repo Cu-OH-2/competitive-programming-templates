@@ -141,9 +141,9 @@ ostream& operator<<(ostream& out, const Large& large)
 {
     if (large.len == 0)
     {
-        cout << '0';
+        out << '0';
         return out;
     }
-    for (int i = large.len - 1; i >= 0; --i) cout << large.ar[i];
+    for (int i = large.len - 1; i >= 0; --i) out << large.ar[i];
     return out;
 }

@@ -16,7 +16,7 @@ struct ST
     void build(ll arr[])
     {
         for (int i = 1; i <= sz; ++i) st[i][0] = arr[i];
-        int lg = log2(sz);
+        int lg = __lg(sz);
         for (int i = 1; i <= lg; ++i)
         {
             for (int j = 1; j <= sz; ++j)
@@ -31,7 +31,7 @@ struct ST
     }
     ll query(int lef, int rig)
     {
-        int len = int(log2(rig - lef + 1));
+        int len = __lg(rig - lef + 1);
         return max(st[lef][len], st[rig - (1 << len) + 1][len]);
     }
 };

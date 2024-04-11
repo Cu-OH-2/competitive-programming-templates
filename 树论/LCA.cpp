@@ -1,5 +1,5 @@
 /*******************************************************************
-* 时间复杂度: O(logM)
+* 时间复杂度: O(logm)
 * 说明: 适用于有根树
 *******************************************************************/
 const int N = 500005;
@@ -25,7 +25,7 @@ struct LCA
 
     void build(int sz)
     {
-        int lg = int(log2(sz));
+        int lg = __lg(sz);
         for (int i = 1; i <= lg; ++i)
         {
             for (int j = 1; j <= sz; ++j)
@@ -39,16 +39,12 @@ struct LCA
         return;
     }
 
-    LCA() {}
-    LCA(int x, int root) { init(x, root); }
-
-    void init(int x, int root)
-    {
+    LCA(int x, int root) 
+    { 
         d.resize(x + 1);
         st.resize(x + 1, vector<int>(32));
         dfs(root);
-        build(x);
-        return;
+        build(x); 
     }
 
     int query(int a, int b)
