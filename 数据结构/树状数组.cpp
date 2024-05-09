@@ -9,8 +9,6 @@ struct Fenwick
 {
     int sz;
     vector<ll> tree;
-    //vector<int> tag;
-    //int now;
 
     int lowbit(int x) { return x & -x; }
 
