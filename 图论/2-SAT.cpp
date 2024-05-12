@@ -1,11 +1,12 @@
 /*******************************************************************
 * 时间复杂度：O(N+M)
-* 说明：按照推导关系建有向图，判断是否有两个矛盾点在同一强连通分量中
+* 说明：
+* 1. 以P4782为例
+* 2. 按照推导关系建有向图，判断是否有两个矛盾点在同一强连通分量中
+* 3. 建图[1,n]+[n+1,2n]后调用大小为n的ts，res是一组合法构造
 *******************************************************************/
 const int N = 2000005;
 
-ll n, m, x, y;
-bool a, b;
 vector<int> node[N];
 
 struct Tarjan
@@ -80,8 +81,8 @@ struct TwoSat
     vector<int> res;
     inline int negate(int x)
     {
-        if (x > n) return x - n;
-        else return x + n;
+        if (x > sz) return x - sz;
+        else return x + sz;
     }
     TwoSat(int x)
     {
@@ -92,11 +93,11 @@ struct TwoSat
     {
         Tarjan tj(sz * 2);
         tj.shrink();
-        for (int i = 1; i <= n; ++i)
+        for (int i = 1; i <= sz; ++i)
         {
             if (tj.id[i] == tj.id[negate(i)]) return 0;
         }
-        for (int i = 1; i <= n; ++i)
+        for (int i = 1; i <= sz; ++i)
         {
             res[i] = tj.id[i] > tj.id[negate(i)];
         }
@@ -106,9 +107,12 @@ struct TwoSat
 
 void solve()
 {
+    ll n, m;
     cin >> n >> m;
     for (int i = 1; i <= m; ++i)
     {
+        bool a, b;
+        ll x, y;
         cin >> x >> a >> y >> b;
         node[x + (!a) * n].push_back(y + b * n);
         node[y + (!b) * n].push_back(x + a * n);
