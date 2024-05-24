@@ -99,7 +99,7 @@ struct TwoSat
         }
         for (int i = 1; i <= sz; ++i)
         {
-            res[i] = tj.id[i] > tj.id[negate(i)];
+            res[i] = tj.id[i] < tj.id[negate(i)];
         }
         return 1;
     }
@@ -114,8 +114,8 @@ void solve()
         bool a, b;
         ll x, y;
         cin >> x >> a >> y >> b;
-        node[x + (!a) * n].push_back(y + b * n);
-        node[y + (!b) * n].push_back(x + a * n);
+        node[x + a * n].push_back(y + (!b) * n);
+        node[y + b * n].push_back(x + (!a) * n);
     }
     TwoSat ts(n);
     if (!ts.work()) cout << "IMPOSSIBLE\n";
