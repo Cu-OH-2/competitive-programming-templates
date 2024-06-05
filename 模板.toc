@@ -66,6 +66,7 @@
 \contentsline {subsection}{\numberline {7.12}Prim算法}{25}{}%
 \contentsline {subsection}{\numberline {7.13}Kruskal算法}{26}{}%
 \contentsline {subsection}{\numberline {7.14}Kruskal重构树}{26}{}%
+\contentsline {subsection}{\numberline {7.15}Hierholzer算法}{27}{}%
 \contentsline {section}{\numberline {8}计算几何}{27}{}%
 \contentsline {subsection}{\numberline {8.1}平面坐标旋转}{27}{}%
 \contentsline {subsection}{\numberline {8.2}平面最近点对}{27}{}%
@@ -74,13 +75,13 @@
 \contentsline {subsection}{\numberline {9.1}普通莫队算法}{28}{}%
 \contentsline {subsection}{\numberline {9.2}带修改莫队算法}{28}{}%
 \contentsline {subsection}{\numberline {9.3}莫队二次离线}{29}{}%
-\contentsline {subsection}{\numberline {9.4}整体二分}{29}{}%
+\contentsline {subsection}{\numberline {9.4}整体二分}{30}{}%
 \contentsline {subsection}{\numberline {9.5}三分}{30}{}%
 \contentsline {subsection}{\numberline {9.6}离散化}{30}{}%
 \contentsline {subsection}{\numberline {9.7}快速排序}{30}{}%
-\contentsline {subsection}{\numberline {9.8}枚举集合}{30}{}%
+\contentsline {subsection}{\numberline {9.8}枚举集合}{31}{}%
 \contentsline {subsection}{\numberline {9.9}CDQ分治+CDQ分治=多维偏序}{31}{}%
-\contentsline {subsection}{\numberline {9.10}CDQ分治+数据结构=多维偏序}{31}{}%
+\contentsline {subsection}{\numberline {9.10}CDQ分治+数据结构=多维偏序}{32}{}%
 \contentsline {section}{\numberline {10}博弈论}{32}{}%
 \contentsline {subsection}{\numberline {10.1}Fibonacci博弈}{32}{}%
 \contentsline {subsection}{\numberline {10.2}Wythoff博弈}{32}{}%

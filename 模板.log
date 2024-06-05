@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.2.6)  9 MAY 2024 16:12
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex 2022.2.6)  5 JUN 2024 17:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -621,22 +621,28 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [26])
-(./计算几何/平面坐标旋转.cpp) (./计算几何/平面最近点对.cpp
+(./图论/Hierholzer算法.cpp) (./计算几何/平面坐标旋转.cpp) (./计算几何/平面最近点对.cpp [27])
+(./计算几何/平面叉乘.cpp) (./杂项算法/普通莫队算法.cpp) (./杂项算法/带修改莫队算法.cpp [28])
+(./杂项算法/莫队二次离线.cpp
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [27])
-(./计算几何/平面叉乘.cpp) (./杂项算法/普通莫队算法.cpp) (./杂项算法/带修改莫队算法.cpp [28])
-(./杂项算法/莫队二次离线.cpp) (./杂项算法/整体二分.cpp [29]) (./杂项算法/三分.cpp) (./杂项算法/离散化.cpp)
-(./杂项算法/快速排序.cpp) (./杂项算法/枚举集合.cpp [30]) (./杂项算法/CDQ分治+CDQ分治=多维偏序.cpp)
-(./杂项算法/CDQ分治+数据结构=多维偏序.cpp [31]) (./博弈论/Fibonacci博弈.cpp) (./博弈论/Wythoff博弈.cpp)
-(./博弈论/Green Hackenbush博弈.cpp) [32] (./模板.aux) ) 
+ [29])
+(./杂项算法/整体二分.cpp) (./杂项算法/三分.cpp) (./杂项算法/离散化.cpp) (./杂项算法/快速排序.cpp [30])
+(./杂项算法/枚举集合.cpp) (./杂项算法/CDQ分治+CDQ分治=多维偏序.cpp)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [31]
+(./杂项算法/CDQ分治+数据结构=多维偏序.cpp) (./博弈论/Fibonacci博弈.cpp) (./博弈论/Wythoff博弈.cpp)
+(./博弈论/Green Hackenbush博弈.cpp) [32] [33
+
+] (./模板.aux) ) 
 Here is how much of TeX's memory you used:
- 9527 strings out of 476919
- 209684 string characters out of 5825425
- 1921951 words of memory out of 5000000
- 29169 multiletter control sequences out of 15000+600000
+ 9531 strings out of 476919
+ 209755 string characters out of 5825425
+ 1949951 words of memory out of 5000000
+ 29170 multiletter control sequences out of 15000+600000
  407606 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  82i,12n,88p,296b,1703s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on 模板.pdf (34 pages).
+Output written on 模板.pdf (35 pages).
