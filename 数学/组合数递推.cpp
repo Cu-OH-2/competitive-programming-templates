@@ -11,7 +11,7 @@ struct Comb
         for (int i = 0; i <= x; ++i) c[i][0] = 1;
         for (int i = 1; i <= x; ++i)
         {
-            for (int j = 1; j <= i; ++j) c[i][j] = (c[i - 1][j - 1] + c[i - 1][j]) % mod;
+            for (int j = 1; j <= y; ++j) c[i][j] = (c[i - 1][j - 1] + c[i - 1][j]) % mod;
         }
     }
     ll val(int x, int y)
