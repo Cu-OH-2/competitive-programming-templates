@@ -11,20 +11,20 @@ struct ST
     void init(int x)
     {
         sz = x;
-        st.resize(sz + 1, vector<ll>(32));
+        st.resize(32, vector<ll>(sz + 1));
     }
     void build(ll arr[])
     {
-        for (int i = 1; i <= sz; ++i) st[i][0] = arr[i];
+        for (int i = 1; i <= sz; ++i) st[0][i] = arr[i];
         int lg = __lg(sz);
         for (int i = 1; i <= lg; ++i)
         {
             for (int j = 1; j <= sz; ++j)
             {
-                st[j][i] = st[j][i - 1];
+                st[i][j] = st[i - 1][j];
                 if (j + (1 << (i - 1)) <= sz)
                 {
-                    st[j][i] = max(st[j][i], st[j + (1 << (i - 1))][i - 1]);
+                    st[i][j] = max(st[i][j], st[i - 1][j + (1 << (i - 1))]);
                 }
             }
         }
@@ -32,6 +32,6 @@ struct ST
     ll query(int lef, int rig)
     {
         int len = __lg(rig - lef + 1);
-        return max(st[lef][len], st[rig - (1 << len) + 1][len]);
+        return max(st[len][lef], st[len][rig - (1 << len) + 1]);
     }
 };
