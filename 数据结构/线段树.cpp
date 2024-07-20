@@ -245,7 +245,8 @@ struct SegTree
 
     int bis(int src, ll tar)
     {
-        if(tree[src].val + tree[src].tag < tar) return tree[src].rig + 1;
+        pushdown(src);
+        if(tree[src].val < tar) return tree[src].rig + 1;
         if(tree[src].lef == tree[src].rig) return tree[src].lef;
         if(tree[src << 1].val + tree[src << 1].tag >= tar) return bis(src << 1, tar);
         else return bis(src << 1 | 1, tar);
