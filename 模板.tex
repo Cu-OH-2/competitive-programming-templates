@@ -71,10 +71,27 @@
 			
 		\subsection{实用代码}
 			\lstinputlisting{通用/实用代码.cpp}
+		
+		\subsection{编译指令}
+			\noindent\begin{enumerate}
+\item 支持 C++14：\texttt{-std=c++14}
+\item STL debug：\texttt{-D\_GLIBCXX\_DEBUG}
+\item 内存错误检查：\texttt{-fsanitize=address}
+\item 未定义行为检查：\texttt{-fsanitize=undefined}
+			\end{enumerate}
 			
-		\subsection{注意事项}
-		 	\lstinputlisting{通用/注意事项.cpp}
-			
+		\subsection{常犯错误}
+			\noindent\begin{enumerate}
+\item 爆 \texttt{long long}
+\item 数组首尾边界未初始化
+\item 组间数据未清空重置
+\item 交互题没用 \texttt{endl}
+\item \texttt{size()} 参与减法导致溢出
+\item \texttt{for(j)} 循环写成 \texttt{++i}
+\item 输入没写全/输入顺序错
+\item 输入浮点数导致超时
+\item \texttt{n} 和 \texttt{m} 混淆
+			\end{enumerate}
 			
 	\section{动态规划}
 	 	\subsection{单调队列优化多重背包}
@@ -115,6 +132,9 @@
 			\lstinputlisting{字符串/字符串哈希.cpp}
 	 	 	
 	\section{数学}
+		\subsection{快速模}
+	 	 	\lstinputlisting{数学/快速模.cpp}
+	 	 	
 		\subsection{快速幂}
 	 	 	\lstinputlisting{数学/快速幂.cpp}
 	 	 	
@@ -154,9 +174,29 @@
 	 	\subsection{扩展中国剩余定理}
 	 	 	\lstinputlisting{数学/扩展中国剩余定理.cpp}
 	 	 	
+	 	\subsection{多项式}
+	 	 	\lstinputlisting{数学/多项式.cpp}
+	 	 	
 	 	\subsection{哥德巴赫猜想}
-	 	 	\lstinputlisting{数学/哥德巴赫猜想.cpp}
-	
+			\noindent\begin{enumerate}
+\item 大于等于 6 的整数可以写成三个质数之和
+
+\item 大于等于 4 的偶数可以写成两个质数之和
+
+\item 大于等于 7 的奇数可以写成三个奇质数之和
+			\end{enumerate}
+
+		\subsection{组合数学公式}
+			\noindent\begin{enumerate}
+\item $C_{n}^{m}=C_{n-1}^{m}+C_{n-1}^{m-1}$
+
+\item $H_n=\frac{1}{n+1}C_{2n}^{n}$
+
+\item $S(n,m)=S(n-1,m-1)+mS(n-1,m)$
+
+\item $s(n,m)=s(n-1,m-1)+(n-1)s(n-1,m)$
+			\end{enumerate}
+
 	\section{数据结构}
 		\subsection{哈希表}
 			\lstinputlisting{数据结构/哈希表.cpp}
