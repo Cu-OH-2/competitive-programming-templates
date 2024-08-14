@@ -69,3 +69,31 @@ ll diameter(vector<P>& p) // counterclockwise
     }
     return res;
 }
+
+vector<P> convex(vector<P>& p) // least points
+{
+    int m = p.size();
+    sort(p.begin(), p.end(),
+         [](auto x, auto y)
+         {
+             if (x.x == y.x) return x.y < y.y;
+             return x.x < y.x;
+         });
+    vector<P> res;
+    vector<int> stk;
+    auto top = [&](int x) { return stk[stk.size() - x]; };
+    for (int i = 0; i < m; ++i)
+    {
+        while (stk.size() >= 2 && cross(p[top(1)] - p[top(2)], p[i] - p[top(1)]) <= 0) stk.pop_back();
+        stk.push_back(i);
+    }
+    for (auto e : stk) res.push_back(p[e]);
+    stk.clear();
+    for (int i = m - 1; i >= 0; --i)
+    {
+        while (stk.size() >= 2 && cross(p[top(1)] - p[top(2)], p[i] - p[top(1)]) <= 0) stk.pop_back();
+        stk.push_back(i);
+    }
+    for (int i = 1; i + 1 < stk.size(); ++i) res.push_back(p[stk[i]]);
+    return res;
+}
