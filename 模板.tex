@@ -1,5 +1,5 @@
 % 宏包与环境
-\documentclass[twocolumn,a4]{article}  %两栏，A4大小
+\documentclass[twocolumn,a4,8pt]{article}  %两栏，A4大小
 \usepackage{xeCJK} % 中文支持
 \usepackage{amsmath, amsthm}
 \usepackage{listings,xcolor}  %插入代码
@@ -35,7 +35,7 @@
     columns     = fullflexible,
     commentstyle = \color[RGB]{0,128,0},
     keywordstyle = \color[RGB]{0,0,255},
-    basicstyle   = \scriptsize\ttfamily,
+    basicstyle   = \fontsize{6}{6}\ttfamily,
     stringstyle  = \color[RGB]{148,0,209}\ttfamily,
     rulesepcolor = \color{red!20!green!20!blue!20},
     showstringspaces = false,
@@ -47,6 +47,9 @@
 \renewcommand{\today}{\number\year 年 \number\month 月 \number\day 日}
 
 \begin{document}
+	% 缩小字体
+	\small 
+
 	% 生成标题
 	\begin{titlepage}
 		\maketitle
@@ -65,6 +68,7 @@
 	\pagestyle{fancy}
 	\setcounter{page}{1} %从当前页开始计算页数
 	
+	% 正文开始
 	\section{通用}
 		\subsection{基础框架}
 			\lstinputlisting{通用/答题框架.cpp}
@@ -297,14 +301,11 @@
 	 	 	\lstinputlisting{图论/Hierholzer算法.cpp}
 	 	 	
 	\section{计算几何}
-		\subsection{平面坐标旋转}
-	 	 	\lstinputlisting{计算几何/平面坐标旋转.cpp}
+		\subsection{整数平面坐标}
+	 	 	\lstinputlisting{计算几何/整数平面坐标.cpp}
 	 	 	
-		\subsection{平面最近点对}
-	 	 	\lstinputlisting{计算几何/平面最近点对.cpp}
-	 	 	
-	 	 \subsection{平面叉乘}
-	 	 	\lstinputlisting{计算几何/平面叉乘.cpp}
+		\subsection{浮点数平面坐标}
+	 	 	\lstinputlisting{计算几何/浮点数平面坐标.cpp}
 	
 	\section{杂项算法}
 		\subsection{普通莫队算法}
