@@ -1,149 +1,277 @@
 /*******************************************************************
 * 时间复杂度：O(n)/O(n^2)
-* 说明：待完善，注意复杂度
+* 说明：注意时间复杂度
 *******************************************************************/
 const int N = 5005;
-
-struct Large
+struct L
 {
-    array<ll, N> ar{};
+    array<ll, N> a{};
     int len = 0;
-    Large() {}
-    Large(ll x)
+    L() {}
+    L(ll x)
     {
-        int p = 0;
         while (x)
         {
-            ar[p++] = x % 10;
+            a[len++] = x % 10;
             x /= 10;
         }
-        updateLen();
     }
-    Large(const string& s)
+    L(const string& s)
     {
         for (int i = 0; i < s.size(); ++i)
         {
-            ar[i] = s[s.size() - 1 - i] - '0';
+            a[i] = s[s.size() - 1 - i] - '0';
+            if (a[i]) len = max(len, i + 1);
         }
-        updateLen();
     }
-
-    void updateLen()
+    L& operator=(const L& rhs)
     {
-        len = ar.size();
-        for (int i = ar.size() - 1; i >= 0; --i)
-        {
-            if (ar[i]) break;
-            len = i;
-        }
-        return;
-    }
-
-    Large& operator=(const Large& rhs)
-    {
-        for (int i = 0; i < ar.size(); ++i) ar[i] = rhs.ar[i];
-        updateLen();
+        a = rhs.a;
+        len = rhs.len;
         return *this;
     }
-
-    Large operator+(const Large& rhs) const
+    L& operator+=(const L& rhs)
     {
-        Large res;
-        for (int i = 0; i < ar.size(); ++i) res.ar[i] = ar[i] + rhs.ar[i];
-        for (int i = 0; i < ar.size() - 1; ++i)
+        for (int i = 0; i < max(len, rhs.len); ++i)
         {
-            res.ar[i + 1] += res.ar[i] / 10;
-            res.ar[i] %= 10;
+            a[i] += rhs.a[i];
+            if (i + 1 < N) a[i + 1] += a[i] / 10;
+            a[i] %= 10;
         }
-        res.updateLen();
-        return res;
-    }
-
-    Large& operator+=(const Large& rhs)
-    {
-        for (int i = 0; i < ar.size(); ++i) ar[i] += rhs.ar[i];
-        for (int i = 0; i < ar.size() - 1; ++i)
-        {
-            ar[i + 1] += ar[i] / 10;
-            ar[i] %= 10;
-        }
-        updateLen();
+        len = max(len, rhs.len);
+        if (len < N && a[len]) len++;
         return *this;
     }
-
-    Large operator-(const Large& rhs) const
+    L operator+(const L& rhs) const
     {
-        Large res;
-        for (int i = 0; i < ar.size(); ++i) res.ar[i] = ar[i] - rhs.ar[i];
-        for (int i = 0; i < ar.size() - 1; ++i)
-        {
-            if (res.ar[i] < 0)
-            {
-                res.ar[i] += 10;
-                res.ar[i + 1]--;
-            }
-        }
-        res.updateLen();
+        L res(*this);
+        res += rhs;
         return res;
     }
-
-    Large operator*(const ll rhs) const
+    L& operator-=(const L& rhs)
     {
-        Large res;
-        for (int i = 0; i < ar.size(); ++i) res.ar[i] = ar[i] * rhs;
-        for (int i = 0; i < ar.size() - 1; ++i)
+        for (int i = 0; i < rhs.len; ++i) a[i] -= rhs.a[i];
+        for (int i = 0; i < len; ++i)
         {
-            if (res.ar[i] > 9)
+            if (a[i] < 0)
             {
-                res.ar[i + 1] += res.ar[i] / 10;
-                res.ar[i] %= 10;
+                a[i] += 10;
+                if (i + 1 < N) a[i + 1]--;
             }
         }
-        res.updateLen();
-        return res;
-    }
-
-    Large& operator*=(const ll rhs)
-    {
-        for (int i = 0; i < ar.size(); ++i) ar[i] *= rhs;
-        for (int i = 0; i < ar.size() - 1; ++i)
-        {
-            if (ar[i] > 9)
-            {
-                ar[i + 1] += ar[i] / 10;
-                ar[i] %= 10;
-            }
-        }
-        updateLen();
+        while (len - 1 >= 0 && a[len - 1] == 0) len--;
         return *this;
     }
-
-    Large operator*(const Large& rhs) const
+    L operator-(const L& rhs) const
     {
-        Large res;
-        Large dup = *this;
-        for (int i = 0; i < rhs.len; ++i)
-        {
-            res += dup * rhs.ar[i];
-            dup *= 10;
-        }
+        L res(*this);
+        res -= rhs;
         return res;
     }
-
-    Large& operator*=(const Large& rhs)
+    L& operator*=(const ll rhs)
+    {
+        if (rhs == 0)
+        {
+            *this = L();
+            return *this;
+        }
+        for (int i = 0; i < len; ++i) a[i] *= rhs;
+        for (int i = 0; i < min(len + 20, N); ++i)
+        {
+            if (i + 1 < N) a[i + 1] += a[i] / 10;
+            a[i] %= 10;
+            if (a[i]) len = max(len, i + 1);
+        }
+        return *this;
+    }
+    L operator*(const ll rhs) const
+    {
+        L res(*this);
+        res *= rhs;
+        return res;
+    }
+    L operator*(const L& rhs) const
+    {
+        if (rhs.len == 0) return L();
+        L res;
+        for (int i = 0; i < len; ++i)
+        {
+            for (int j = 0; j < rhs.len; ++j) res.a[i + j] += a[i] * rhs.a[j];
+        }
+        res.len = min(N, len + rhs.len - 1);
+        for (int i = 0; i < res.len; ++i)
+        {
+            if (i + 1 < N) res.a[i + 1] += res.a[i] / 10;
+            res.a[i] %= 10;
+        }
+        if (res.len < N && res.a[res.len]) res.len++;
+        return res;
+    }
+    L& operator*=(const L& rhs)
     {
         *this = *this * rhs;
         return *this;
     }
-};
 
-ostream& operator<<(ostream& out, const Large& large)
+    L& operator/=(const ll rhs)
+    {
+        assert(rhs);
+        for (int i = len - 1; i >= 0; --i)
+        {
+            if (i - 1 >= 0) a[i - 1] += a[i] % rhs * 10;
+            a[i] /= rhs;
+        }
+        while (len - 1 >= 0 && a[len - 1] == 0) len--;
+        return *this;
+    }
+    L operator/(const ll rhs) const
+    {
+        L res(*this);
+        res /= rhs;
+        return res;
+    }
+    L operator/(const L& rhs) const
+    {
+        assert(rhs.len);
+        if (*this < rhs) return L();
+        L res, rem(*this);
+        auto compare = [&](int i)
+        {
+            if (i + rhs.len < N && rem.a[i + rhs.len]) return true;
+            for (int j = rhs.len - 1; j >= 0; --j)
+            {
+                if (rem.a[i + j] < rhs.a[j]) return false;
+                else if (rem.a[i + j] > rhs.a[j]) return true;
+            }
+            return true;
+        };
+        for (int i = rem.len - rhs.len; i >= 0; --i)
+        {
+            while (compare(i))
+            {
+                res.a[i]++;
+                res.len = max(res.len, i + 1);
+                for (int j = 0; j < rhs.len; ++j)
+                {
+                    rem.a[i + j] -= rhs.a[j];
+                    if (rem.a[i + j] < 0)
+                    {
+                        rem.a[i + j] += 10;
+                        if (i + j + 1 < N) rem.a[i + j + 1]--;
+                    }
+                }
+            }
+        }
+        while (rem.len - 1 >= 0 && rem.a[rem.len - 1] == 0) rem.len--;
+        return res;
+    }
+    L& operator/=(const L& rhs)
+    {
+        *this = *this / rhs;
+        return *this;
+    }
+    L operator%(const L& rhs) const
+    {
+        assert(rhs.len);
+        if (*this < rhs) return *this;
+        L res, rem(*this);
+        auto compare = [&](int i)
+        {
+            if (i + rhs.len < N && rem.a[i + rhs.len]) return true;
+            for (int j = rhs.len - 1; j >= 0; --j)
+            {
+                if (rem.a[i + j] < rhs.a[j]) return false;
+                else if (rem.a[i + j] > rhs.a[j]) return true;
+            }
+            return true;
+        };
+        for (int i = rem.len - rhs.len; i >= 0; --i)
+        {
+            while (compare(i))
+            {
+                res.a[i]++;
+                res.len = max(res.len, i + 1);
+                for (int j = 0; j < rhs.len; ++j)
+                {
+                    rem.a[i + j] -= rhs.a[j];
+                    if (rem.a[i + j] < 0)
+                    {
+                        rem.a[i + j] += 10;
+                        if (i + j + 1 < N) rem.a[i + j + 1]--;
+                    }
+                }
+            }
+        }
+        while (rem.len - 1 >= 0 && rem.a[rem.len - 1] == 0) rem.len--;
+        return rem;
+    }
+    L& operator%=(const L& rhs)
+    {
+        *this = *this % rhs;
+        return *this;
+    }
+    ll operator%(const ll rhs) const
+    {
+        ll res = 0;
+        for (int i = N - 1; i >= 0; --i)
+        {
+            res = res * 10 + a[i];
+            res %= rhs;
+        }
+        return res;
+    }
+    bool operator<(const L& rhs) const
+    {
+        if (len < rhs.len) return 1;
+        else if (len > rhs.len) return 0;
+        for (int i = len - 1; i >= 0; --i)
+        {
+            if (a[i] < rhs.a[i]) return 1;
+            else if (a[i] > rhs.a[i]) return 0;
+        }
+        return 0;
+    }
+    bool operator>(const L& rhs) const
+    {
+        if (len > rhs.len) return 1;
+        else if (len < rhs.len) return 0;
+        for (int i = len - 1; i >= 0; --i)
+        {
+            if (a[i] > rhs.a[i]) return 1;
+            else if (a[i] < rhs.a[i]) return 0;
+        }
+        return 0;
+    }
+    bool operator>=(const L& rhs) const { return !(*this < rhs); }
+    bool operator<=(const L& rhs) const { return !(*this > rhs); }
+    bool operator==(const L& rhs) const { return a == rhs.a; }
+    static L p10(int p) { return L(string("1") + string(p, '0')); }
+    L sqrt() const
+    {
+        L lef(0), rig(p10(len / 2 + 1));
+        while (lef < rig - 1)
+        {
+            L mid = (lef + rig) / 2;
+            if (mid * mid <= *this) lef = mid;
+            else rig = mid;
+        }
+        return lef;
+    }
+};
+ostream& operator<<(ostream& out, const L& rhs)
 {
-    if (large.len == 0)
+    if (rhs.len == 0)
     {
         out << '0';
         return out;
     }
-    for (int i = large.len - 1; i >= 0; --i) out << large.ar[i];
+    for (int i = rhs.len - 1; i >= 0; --i) out << rhs.a[i];
     return out;
+}
+istream& operator>>(istream& in, L& rhs)
+{
+    string s;
+    in >> s;
+    rhs = L(s);
+    return in;
 }
