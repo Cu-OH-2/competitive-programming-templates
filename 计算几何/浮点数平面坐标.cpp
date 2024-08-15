@@ -6,6 +6,7 @@ using ld = long double;
 
 constexpr ld INF = 1e100;
 constexpr ld PI = acosl(-1);
+constexpr ld EPS = 1e-9;
 
 struct P
 {
@@ -65,4 +66,40 @@ ld closest(vector<P>& p) // P1429
         return low;
     };
     return work(0, p.size());
+}
+
+array<ld, 3> circle(const P& p1, const P& p2, const P& p3)
+{
+    P a(2 * (p1.x - p2.x), 2 * (p1.x - p3.x));
+    P b(2 * (p1.y - p2.y), 2 * (p1.y - p3.y));
+    P c(p1 * p1 - p2 * p2, p1 * p1 - p3 * p3);
+    P o(cross(c, b) / cross(a, b), cross(c, a) / cross(b, a));
+    return { o.x, o.y, dis(o, p1) };
+}
+
+array<ld, 3> circle(vector<P>& p)
+{
+    shuffle(p.begin(), p.end(), mt19937(time(0)));
+    int m = p.size();
+    P c;
+    ld r = 0;
+    for (int i = 0; i < m; ++i)
+    {
+        if (dis(p[i], c) <= r + EPS) continue;
+        c = p[i], r = 0;
+        for (int j = 0; j < i; ++j)
+        {
+            if (dis(p[j], c) <= r + EPS) continue;
+            c.x = (p[i].x + p[j].x) / 2;
+            c.y = (p[i].y + p[j].y) / 2;
+            r = dis(p[i], p[j]) / 2;
+            for (int k = 0; k < j; ++k)
+            {
+                if (dis(p[k], c) < r + EPS) continue;
+                auto cir = circle(p[i], p[j], p[k]);
+                c.x = cir[0], c.y = cir[1], r = cir[2];
+            }
+        }
+    }
+    return { c.x, c.y, r };
 }
