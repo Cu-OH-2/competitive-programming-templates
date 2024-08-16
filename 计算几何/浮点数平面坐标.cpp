@@ -103,3 +103,35 @@ array<ld, 3> circle(vector<P>& p)
     }
     return { c.x, c.y, r };
 }
+
+array<P, 4> rectangle(vector<P>& p)
+{
+    // convex & counterclockwise
+    array<P, 4> res{};
+    ld ans = INF;
+    int m = p.size();
+    int top = 1, lef = -1, rig = 1;
+    for (int i = 0; i < m; ++i)
+    {
+        P bot = p[(i + 1) % m] - p[i];
+        while (bot * (p[(rig + 1) % m] - p[i]) >= bot * (p[rig] - p[i])) rig = (rig + 1) % m;
+        while (cross(p[(top + 1) % m] - p[i], bot) <= cross(p[top] - p[i], bot)) top = (top + 1) % m;
+        if (lef == -1) lef = top;
+        while (bot * (p[(lef + 1) % m] - p[i]) <= bot * (p[lef] - p[i])) lef = (lef + 1) % m;
+        ld lb = (p[i] - p[lef]) * bot / bot.len(), rb = (p[rig] - p[i]) * bot / bot.len();
+        ld base = lb + rb;
+        ld high = cross(bot, p[top] - p[i]) / bot.len();
+        ld area = base * high;
+        if (area < ans)
+        {
+            ans = area;
+            ld o = bot.len();
+            bot.x /= o, bot.y /= o;
+            res[0] = p[i] + P(-bot.x * lb, -bot.y * lb);
+            res[1] = p[i] + P(bot.x * rb, bot.y * rb);
+            P h(-bot.y * high, bot.x * high);
+            res[2] = res[1] + h, res[3] = res[0] + h;
+        }
+    }
+    return res;
+}
