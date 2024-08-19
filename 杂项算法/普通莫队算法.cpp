@@ -23,7 +23,7 @@ struct Q
 void solve()
 {
     cin >> n >> m >> k;
-    BLOCK = n / sqrt(m); // 块大小
+    BLOCK = sqrt(m); // 块大小
     for (int i = 1; i <= n; ++i) cin >> a[i];
 
     // 离线处理询问
