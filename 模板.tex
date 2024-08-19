@@ -9,7 +9,7 @@
 \usepackage{fancyhdr} % 自定义页眉页脚
 \setsansfont{Consolas} % 设置英文字体
 \setmonofont[Mapping={}]{Consolas} % 英文引号之类的正常显示，相当于设置英文字体
-\geometry{left=1cm,right=1cm,top=2cm,bottom=0.5cm} % 页边距
+\geometry{left=1cm,right=1cm,top=2cm,bottom=0.8cm} % 页边距
 \setlength{\columnsep}{30pt}  %两栏之间的间距大小
 \setlength\columnseprule{0.4pt} % 分割线
 
@@ -47,9 +47,6 @@
 \renewcommand{\today}{\number\year 年 \number\month 月 \number\day 日}
 
 \begin{document}
-	% 缩小字体
-	\small 
-
 	% 生成标题
 	\begin{titlepage}
 		\maketitle
@@ -66,7 +63,10 @@
 	\clearpage
 	\newpage
 	\pagestyle{fancy}
-	\setcounter{page}{1} %从当前页开始计算页数
+	\setcounter{page}{1} % 从当前页开始计算页数
+	
+	% 缩小字体
+	\footnotesize
 	
 	% 正文开始
 	\section{通用}
@@ -77,275 +77,633 @@
 			\lstinputlisting{通用/实用代码.cpp}
 		
 		\subsection{编译指令}
-			\noindent\begin{enumerate}
-\item 支持 C++14：\texttt{-std=c++14}
+	 		\noindent\begin{itemize}
+\item 启用 C++14 标准：\texttt{-std=c++14}
 \item STL debug：\texttt{-D\_GLIBCXX\_DEBUG}
 \item 内存错误检查：\texttt{-fsanitize=address}
 \item 未定义行为检查：\texttt{-fsanitize=undefined}
-			\end{enumerate}
+	 		\end{itemize}
 			
 		\subsection{常犯错误}
-			\noindent\begin{enumerate}
+	 		\noindent\begin{itemize}
 \item 爆 \texttt{long long}
 \item 数组首尾边界未初始化
 \item 组间数据未清空重置
-\item 交互题没用 \texttt{endl}
+\item 交互题没换 \texttt{endl}
 \item \texttt{size()} 参与减法导致溢出
 \item \texttt{for(j)} 循环写成 \texttt{++i}
 \item 输入没写全/输入顺序错
 \item 输入浮点数导致超时
 \item \texttt{n} 和 \texttt{m} 混淆
-			\end{enumerate}
+	 		\end{itemize}
 			
 	\section{动态规划}
 	 	\subsection{单调队列优化多重背包}
+	 		\noindent\begin{itemize}
+		 		\item $dp_j=\underset{k}\max\{dp_{j-kw_i}\}$，对于模 $w_i$ 的每个余数维护一个单调队列
+		 		\item 时间复杂度：$O(nm)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{动态规划/单调队列优化多重背包.cpp}
 	 	 	
 	 	\subsection{二进制分组优化多重背包}
+	 		\noindent\begin{itemize}
+		 		\item 可以使用 bitset 继续优化
+		 		\item 时间复杂度：$O(nm\log k)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{动态规划/二进制分组优化多重背包.cpp}
 	 	 	
 		\subsection{动态DP}
+	 		\noindent\begin{itemize}
+		 		\item 如果转移只涉及相邻两个位置，可以尝试将转移方程表示为矩阵乘法；由于矩阵乘法满足结合律，可以用线段树维护，实现动态带修改 DP
+		 		\item 时间复杂度：$O((q+n)\log n)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{动态规划/动态DP.cpp}
 	 	 	
 	\section{字符串}
 		\subsection{KMP算法}
+	 		\noindent\begin{itemize}
+		 		\item 字符串下标从0开始
+		 		\item $\text{next}_i$表示$t_i$失配时下一次匹配的位置，其中$\text{next}_n$无作用，仅构成前缀数组
+		 		\item 前缀数组$\pi_i=\text{next}_{i+1}+1$代表前缀$t_{[0,i]}$的最长前后缀长度
+		 		\item 时间复杂度：构建 $O(m)$/匹配 $O(n)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{字符串/KMP算法.cpp}
 	 	
 		\subsection{扩展KMP算法}
+	 		\noindent\begin{itemize}
+		 		\item 字符串下标从0开始
+		 		\item $z_i$ 表示后缀 $t_{[i,n-1]}$ 与母串的最长公共前缀
+		 		\item 该算法还可以求模式串与文本串每个后缀的LCP
+		 		\item 时间复杂度：$O(n)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{字符串/扩展KMP算法.cpp}
 	
 	 	 \subsection{字典树}
+	 		\noindent\begin{itemize}
+		 		\item 每个结点代表一个前缀
+		 		\item 字母表变化时需要修改F和ALPSZ
+		 		\item 若需要搜索整棵树，用一个数组记录出边可以降低常数
+		 		\item 时间复杂度：$O(n)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{字符串/字典树.cpp}
 	 	 	
 		\subsection{AC自动机}
+	 		\noindent\begin{itemize}
+	 			\item fail指针指向模式串前缀的最长后缀状态，每转移一次状态都需要上跳 $O(n)$ 次
+		 		\item 字母表变化时需要修改F和ALPSZ
+		 		\item trie图优化：建立fail指针时，fail指针指向的结点可能依然失配，需要多次跳转才能到达匹配结点。可以将所有结点的空指针补全为该结点的跳转终点，此时根据BFS序，在计算fail[tr[x][i]]时，fail[x]一定已遍历过，可以将fail[tr[x][i]]直接置为tr[fail[x]][i]
+		 		\item last优化：多模式匹配时，对于文本串的每个前缀$s'$，沿fail指针路径寻找为$s'$后缀的模式串，途中可能经过无贡献的模式串真前缀结点；使用last数组来跳转可以跳过真前缀结点直接到达上方第一个模式串结点。last数组可以完美替代fail数组
+		 		\item 树上差分优化：统计每种模式串出现次数时，每匹配到一个模式串都要向上跳转，这个过程相当于fail树上前缀加，可以用差分优化
+		 		\item 时间复杂度：构建 $O(|\Sigma|\sum m)$/优化匹配$O(n)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{字符串/AC自动机.cpp}
 	 	 	
 		\subsection{后缀自动机}
+	 		\noindent\begin{itemize}
+		 		\item 每个结点代表一系列长度连续、endpos集合相同的子串
+		 		\item 字母表变化时需要修改F和ALPSZ
+		 		\item 时间复杂度：$O(n)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{字符串/后缀自动机.cpp}	
 	 	 	
 		\subsection{回文自动机}
+	 		\noindent\begin{itemize}
+		 		\item 每个结点代表一个本质不同回文串
+		 		\item link链：多字串$\rightarrow$单字符$\rightarrow$偶根$\rightarrow$奇根
+		 		\item 求每个本质不同回文子串次数：最后由母串向子串传递
+		 		\item 求每个前缀的后缀回文子串个数：新建时由最长回文后缀向新串传递
+		 		\item 时间复杂度：$O(n)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{字符串/回文自动机.cpp}	
 	 	 	
 		\subsection{Manacher算法}
+	 		\noindent\begin{itemize}
+		 		\item 用n+1个分隔符将字符串分隔可以将奇偶回文子串过程统一处理
+		 		\item 时间复杂度：$O(n)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{字符串/Manacher算法.cpp}	
 	 	 	
 		\subsection{最小表示法}
+	 		\noindent\begin{itemize}
+		 		\item 求循环rotate得到的n种表示中字典序最小的一种
+		 		\item 时间复杂度：$O(n)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{字符串/最小表示法.cpp}	
 	 	 	
 		\subsection{字符串哈希}
+	 		\noindent\begin{itemize}
+		 		\item 字符串下标从1开始！
+		 		\item 应用：$O(\log)$比较字典序、$O(n\log^2)$求最长公共子串
+		 		\item 时间复杂度：$O(n)$
+	 		\end{itemize}
 			\lstinputlisting{字符串/字符串哈希.cpp}
 	 	 	
 	\section{数学}
 		\subsection{快速模}
+	 		\noindent\begin{itemize}
+		 		\item BarretReduction：$x$ 不能超过$O(\text{mod}^2)$，保险起见最好最后再模一次
+		 		\item 时间复杂度：$O(1)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/快速模.cpp}
 	 	 	
 		\subsection{快速幂}
+	 		\noindent\begin{itemize}
+		 		\item 特殊情况下可能还要对res和$a$的初值进行取模
+		 		\item 若$p$较大且mod为质数可以将$p$对$\text{mod}-1$取模
+		 		\item 利用费马小定理求逆元需要注意仅当mod为质数时有效
+		 		\item 时间复杂度：$O(\log p)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/快速幂.cpp}
 	 	 	
 		\subsection{矩阵快速幂}
+	 		\noindent\begin{itemize}
+		 		\item 递推式可以表示为矩阵乘法时，快速求数列第i项
+		 		\item 时间复杂度：$O(n^3\log p)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/矩阵快速幂.cpp}
 	 	 	
 		\subsection{矩阵求逆}
+	 		\noindent\begin{itemize}
+		 		\item 初等变换消元
+		 		\item 时间复杂度：$O(n^3)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/矩阵求逆.cpp}
 	 	 	
 		\subsection{排列奇偶性}
+	 		\noindent\begin{itemize}
+		 		\item 交换任意两个数，排列奇偶性改变
+				\item 排列奇偶性等于逆序对数的奇偶性
+				\item 求环的个数可以线性得到排列奇偶性
+		 		\item 时间复杂度：$O(n)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/排列奇偶性.cpp}
 
 		\subsection{线性基}
+	 		\noindent\begin{itemize}
+		 		\item 求一组数子集的最大异或和
+				\item 数组中非零元素表示一组线性基
+				\item 线性基大小表征线性空间维数
+				\item 线性基中没有异或和为0的子集
+				\item 线性基中各数二进制最高位不同
+		 		\item 时间复杂度：$O(b)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/线性基.cpp}
 
 	 	\subsection{高精度}
+	 		\noindent\begin{itemize}
+		 		\item 注意时间复杂度
+		 		\item 时间复杂度：$O(n)$/$O(n^2)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/高精度.cpp}
 	 	 	
 	 	\subsection{连续乘法逆元}
+	 		\noindent\begin{itemize}
+		 		\item 注意mod必须与$[1,n]$所有数都互质，否则不存在逆元
+		 		\item 时间复杂度：$O(n)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/连续乘法逆元.cpp}
 	
 	 	\subsection{数论分块}
+	 		\noindent\begin{itemize}
+	 			\item 将区间 $[1,n]$ 根据 $k\bmod i$ 的商分为 $O(\sqrt{n})$ 块
+		 		\item $\sum_{i=1}^n k\bmod i=\sum_{i=1}^n k-\lfloor\frac{k}{i}\rfloor\cdot i=kn-\sum_{i=1}^n \lfloor\frac{k}{i}\rfloor\cdot i$
+		 		\item 时间复杂度：$O(\sqrt{n})$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/数论分块.cpp}
 	
 	 	\subsection{欧拉函数}
+	 		\noindent\begin{itemize}
+		 		\item $\phi(x)=x\prod_{p_x}\frac{p_x-1}{p_x}$，其中 $p_x$ 为 $x$ 的质因子
+		 		\item 若 $x$ 为质数：$\phi(i\cdot x)=\begin{cases}x\phi(i) & i\bmod x=0\\(x-1)\phi(i) & i\bmod x\neq 0\end{cases}$
+		 		\item $x=\sum_{d|x}\phi(d)$
+		 		\item 欧拉定理：若$\gcd(a,m)=1$则$a^{\phi(m)}\equiv 1\pmod m$（$m$为质数时即费马小定理）
+		 		\item 若求$[l,r]$内的欧拉函数，可以先筛出$\sqrt{r}$以内的质数，用这些质数贡献范围内的数，再特判所有数$\sqrt{r}$以上的质因子即可，类似素数筛
+		 		\item 时间复杂度：$O(\sqrt{n})$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/欧拉函数.cpp}
 	
 	 	\subsection{线性素数筛}
+	 		\noindent\begin{itemize}
+	 			\item 每个数只被其最小的质因数筛一次
+		 		\item $\text{sieve}_i$表示$i$是否为合数
+		 		\item 时间复杂度：$O(n)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/线性素数筛.cpp}
 
-	 	\subsection{欧几里得算法+扩展欧几里得算法}
+	 	\subsection{欧几里得算法+扩展欧几里得算法}	 	
+	 		\noindent\begin{itemize}
+	 			\item 扩展欧几里得算法用于求解$ax+by=\gcd(a,b)$
+	 			\item 求出一组可行解$(x_0,y_0)$后，可得解集\\ $\left\{\left(x_0+k\frac{b}{\gcd(a,b)},y_0-k\frac{a}{\gcd(a,b)}\right)\right\}$
+	 			\item 求出的可行解不一定是最小正整数，但一定满足$|x_0|<b,|y_0|<a$
+	 			\item 求解$ax+by=c$时，可以先求解$ax+by=\gcd(a,b)$\\ 得到可行解$(x_0',y_0')$，此时原方程的可行解为\\ $\left(x_0=\frac{c}{\gcd(a,b)}x_0',y_0=\frac{c}{\gcd(a,b)}y_0'\right)$，解集依然为\\ $\left\{\left(x_0+k\frac{b}{\gcd(a,b)},y_0-k\frac{a}{\gcd(a,b)}\right)\right\}$
+	 			\item 扩展欧几里得算法还可以通过解同余方程$ax\equiv 1\pmod p$求乘法逆元，且只需要满足$a,p$互质，不需要$p$是质数
+		 		\item 时间复杂度：$O(\log n)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/欧几里得算法+扩展欧几里得算法.cpp}
 	
 	 	\subsection{中国剩余定理}
+	 		\noindent\begin{itemize}
+	 			\item 用于求解模数两两互质的线性同余方程组$\begin{cases}x\equiv a_1\pmod{n_1}\\x\equiv a_2\pmod{n_2}\\\cdots\\x\equiv a_k\pmod{n_k}\end{cases}$，一定有解
+	 			\item 两数相乘爆\texttt{long long}时可能需要快速乘
+		 		\item 时间复杂度：$O(n\log)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/中国剩余定理.cpp}
 	
 	 	\subsection{扩展中国剩余定理}
+	 		\noindent\begin{itemize}
+	 			\item 用于求解模数不互质的线性同余方程组$\begin{cases}x\equiv a_1\pmod{n_1}\\x\equiv a_2\pmod{n_2}\\\cdots\\x\equiv a_k\pmod{n_k}\end{cases}$，可能无解
+	 			\item 对于两个方程，有$x=n_1x+a_1=n_2y+a_2$，即$n_1x-n_2y=a_2-a_1$，用扩展欧几里得算法合并为一个方程，两两合并直到只剩一个方程
+	 			\item 两数相乘爆\texttt{long long}时可能需要快速乘
+		 		\item 时间复杂度：$O(n\log)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/扩展中国剩余定理.cpp}
 	 	 	
 	 	\subsection{多项式}
+	 		\noindent\begin{itemize}
+	 			\item 模数$998244353$的原根选用$3$
+		 		\item 时间复杂度：$O(n\log n)$
+	 		\end{itemize}
 	 	 	\lstinputlisting{数学/多项式.cpp}
 	 	 	
 	 	\subsection{哥德巴赫猜想}
 			\noindent\begin{enumerate}
-\item 大于等于 6 的整数可以写成三个质数之和
-
-\item 大于等于 4 的偶数可以写成两个质数之和
-
-\item 大于等于 7 的奇数可以写成三个奇质数之和
+				\item 大于等于 6 的整数可以写成三个质数之和
+				\item 大于等于 4 的偶数可以写成两个质数之和
+				\item 大于等于 7 的奇数可以写成三个奇质数之和
 			\end{enumerate}
 
 		\subsection{组合数学公式}
 			\noindent\begin{enumerate}
-\item $C_{n}^{m}=C_{n-1}^{m}+C_{n-1}^{m-1}$
-
-\item $H_n=\frac{1}{n+1}C_{2n}^{n}$
-
-\item $S(n,m)=S(n-1,m-1)+mS(n-1,m)$
-
-\item $s(n,m)=s(n-1,m-1)+(n-1)s(n-1,m)$
+				\item $C_{n}^{m}=C_{n-1}^{m}+C_{n-1}^{m-1}$
+				\item $H_n=\frac{1}{n+1}C_{2n}^{n}$
+				\item $S(n,m)=S(n-1,m-1)+mS(n-1,m)$
+				\item $s(n,m)=s(n-1,m-1)+(n-1)s(n-1,m)$
 			\end{enumerate}
 
 	\section{数据结构}
-		\subsection{哈希表}
-			\lstinputlisting{数据结构/哈希表.cpp}
+		\subsection{单调栈}
+			\noindent\begin{enumerate}
+				\item 求每个数左边或右边第一个大于它的数的位置
+		 		\item 时间复杂度：$O(n)$
+			\end{enumerate}
+			\lstinputlisting{数据结构/单调栈.cpp}
 			
-		\subsection{ST表}
-	 	 	\lstinputlisting{数据结构/ST表.cpp}
+		\subsection{哈希表}
+			\noindent\begin{enumerate}
+				\item 自定义随机化哈希函数，降低碰撞概率
+				\item \texttt{unordered\_map}采用开链法，\texttt{gp\_hash\_table}采用查探法
+		 		\item 时间复杂度：$O(1)$
+			\end{enumerate}
+			\lstinputlisting{数据结构/哈希表.cpp}
 	 	 	
 	 	\subsection{并查集}
+			\noindent\begin{enumerate}
+				\item 使用路径压缩+启发式合并保证时间复杂度
+				\item 时间复杂度：查找$O(1)$/合并$O(1)$
+			\end{enumerate}
 	 	 	\lstinputlisting{数据结构/并查集.cpp}
+			
+		\subsection{ST表}
+			\noindent\begin{enumerate}
+				\item 可重复贡献问题的静态区间查询，需要满足$f(r,r)=r$，一般是最值/GCD
+				\item 必要时可以预处理 $\log i$ 加快查询
+				\item 时间复杂度：建表$O(n\log n)$/查询$O(1)$
+			\end{enumerate}
+	 	 	\lstinputlisting{数据结构/ST表.cpp}
 	 	 	
 	 	\subsection{笛卡尔树}
+			\noindent\begin{enumerate}
+				\item 第一关键字满足二叉搜索树性质，第二关键字满足小根堆性质
+				\item 按照第一关键字顺序传入，按照第二关键字大小构建
+				\item 第一关键字通常为下标，此时建得的堆每个子树都拥有一段连续下标
+				\item 时间复杂度：$O(n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{数据结构/笛卡尔树.cpp}
 
 	 	\subsection{树状数组}
+			\noindent\begin{enumerate}
+				\item 动态维护满足区间减法的性质
+				\item 时间复杂度：建立$O(n)$/修改$O(\log n)$/查询$O(\log n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{数据结构/树状数组.cpp}
 	 	 	
 	 	\subsection{二维树状数组}
+			\noindent\begin{enumerate}
+				\item 时间复杂度：修改$O(\log^2n)$/查询$O(\log^2n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{数据结构/二维树状数组.cpp}
 	 	 	
 	 	\subsection{线段树}
+			\noindent\begin{enumerate}
+				\item 时间复杂度：建立$O(n)$/询问$O(\log n)$/修改$O(\log n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{数据结构/线段树.cpp}
 	 	 	
 		\subsection{历史最值线段树}
+			\noindent\begin{enumerate}
+			 	\item 维护区间历史最值，支持区间加减
+			 	\item 上方标记一定新于下方标记，因此下传可以整体施加
+				\item 时间复杂度：建立$O(n)$/询问$O(\log n)$/修改$O(\log n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{数据结构/历史最值线段树.cpp}
 	 	 	
 	 	\subsection{动态开点线段树}
+			\noindent\begin{enumerate}
+				\item 需要特别注意空间大小
+				\item 时间复杂度：询问$O(\log m)$/修改$O(\log m)$
+			\end{enumerate}
 	 	 	\lstinputlisting{数据结构/动态开点线段树.cpp}
 	 	 	
 		\subsection{可持久化线段树}
+			\noindent\begin{enumerate}
+				\item 需要特别注意空间大小，若维护区间超过较大记得把$32$换成$64$
+				\item 建空根：可以不靠离散化维护大区间，但要谨慎考虑空间复杂度
+				\item 维护值域：将序列元素逐个插入，由前缀和性质，区间值域上性质蕴含在新树和旧树的差之中
+				\item 标记永久化：为了防止新操作影响旧结点，路过结点时标记不下放，也不通过子结点更新父结点，而是直接改变每个结点的值，并在向下搜索时记录累积标记值；此时不支持单点赋值
+				\item 区间第$k$大也可以用整体二分/划分树求解
+				\item 时间复杂度：所有操作$O(\log m)$
+			
+			\end{enumerate}
 	 	 	\lstinputlisting{数据结构/可持久化线段树.cpp}
 	 	 	
 		\subsection{李超线段树}
+			\noindent\begin{enumerate}
+				\item 谨慎使用，注意浮点数精度和结点初始化问题
+				\item 标记永久化，整条链每一层的值都可能是答案
+				\item 时间复杂度：建立$O(n)$/修改$O(\log^2n)$/查询$O(\log n)$
+			\end{enumerate}
 			\lstinputlisting{数据结构/李超线段树.cpp}
 	 	 	
 	\section{树论}
 		\subsection{LCA}
+			\noindent\begin{enumerate}
+				\item 倍增做法
+				\item 时间复杂度：$O(\log n)$
+				\end{enumerate}
 	 	 	\lstinputlisting{树论/LCA.cpp}
 	 	 	
 		\subsection{树的直径}
+			\noindent\begin{enumerate}
+				\item 距离任一点最远的点一定是直径的一端
+				\item 时间复杂度：$O(n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{树论/树的直径.cpp}
 	 	 	
 		\subsection{树哈希}
+			\noindent\begin{enumerate}
+				\item 用于判断有根树同构
+				\item 无根树可通过找重心转换为有根树，若有两个重心需要同时考虑
+				\item 不同的树需要共用同一套\texttt{map}
+				\item 时间复杂度：$O(\log n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{树论/树哈希.cpp}
 	 	 	
 		\subsection{树链剖分}
+			\noindent\begin{enumerate}
+				\item 每个结点最多向上跳 $O(\log n)$ 次，但总链数为 $O(n)$
+				\item 重链结点的DFS序连续，通常由此配合线段树，维护树上两点间路径相关性质
+				\item 时间复杂度：$O(\log n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{树论/树链剖分.cpp}
 	 	 	
 		\subsection{树上启发式合并}
+			\noindent\begin{enumerate}
+				\item 维护一个用于得出答案的状态，离线预处理每个子树的答案
+				\item 可以用遍历DFS序代替递归的贡献计算以优化常数
+				\item 时间复杂度：状态更新次数$O(n\log n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{树论/树上启发式合并.cpp}
 	 	 	
 		\subsection{点分治}
+			\noindent\begin{enumerate}
+				\item 以重心为根分治子树，再考虑所有经过重心的路径
+				\item 通常用于树上路径计数问题
+				\item 时间复杂度：处理结点次数$O(n\log n)$
+			\end{enumerate}
 			\lstinputlisting{树论/点分治.cpp}
 	 	 	
 	\section{图论}
 		\subsection{2-SAT}
+			\noindent\begin{enumerate}
+				\item 按照推导关系建有向图，判断是否有两个矛盾点在同一强连通分量中
+				\item 需要以结点 $[1,2n]$ 建图，最后可以得到一组合法构造
+				\item 时间复杂度：$O(n+m)$
+			\end{enumerate}
 	 	 	\lstinputlisting{图论/2-SAT.cpp}
 
 		\subsection{Bellman-Ford算法}
+			\noindent\begin{enumerate}
+				\item 适用于任何边权的单源最短路问题
+				\item 求出最短路后可判断负环
+				\item 时间复杂度：$O(nm)$
+			\end{enumerate}
 	 	 	\lstinputlisting{图论/Bellman-Ford算法.cpp}
 	 	 	
 		\subsection{Dijkstra算法}
+			\noindent\begin{enumerate}
+				\item 只适用于边权非负的图
+				\item 注意特判图不连通的情况
+				\item 时间复杂度：朴素$O(n^2)$/堆优化$O(m\log m)$
+			\end{enumerate}
 	 	 	\lstinputlisting{图论/Dijkstra算法.cpp}
 	 	 	
-		\subsection{Dinic算法}
-	 	 	\lstinputlisting{图论/Dinic算法.cpp}
-	 	 	
 		\subsection{Floyd算法}
+			\noindent\begin{enumerate}
+				\item 多源最短路、最短路计数、最小环计数
+				\item 时间复杂度：$O(n^3)$
+			\end{enumerate}
 	 	 	\lstinputlisting{图论/Floyd算法.cpp}
 	 	 	
 		\subsection{Kosaraju算法}
+			\noindent\begin{enumerate}
+				\item 求有向图强连通分量
+				\item 时间复杂度：$O(n+m)$
+			\end{enumerate}
 	 	 	\lstinputlisting{图论/Kosaraju算法.cpp}
 	 	 	
+		\subsection{Hierholzer算法}
+			\noindent\begin{enumerate}
+				\item 求欧拉通路，支持重边、有向边
+				\item 使用前需要保证欧拉通路存在，且从其端点开始DFS
+				\item 欧拉通路存在当且仅当奇数度的结点有$0$个或$2$个
+				\item DFS后栈内为欧拉通路的倒序，需要进行翻转
+				\item 时间复杂度：$O(n+m)$
+			\end{enumerate}
+	 	 	\lstinputlisting{图论/Hierholzer算法.cpp}
+	 	 	
 	 	\subsection{Tarjan算法}
+			\noindent\begin{enumerate}
+				\item 时间复杂度：$O(n+m)$
+			\end{enumerate}
 	 	 	\lstinputlisting{图论/Tarjan算法.cpp}
 	 	 	
 	 	\subsection{圆方树}
+			\noindent\begin{enumerate}
+				\item 对点双中的任意三点$a,b,c$，一定存在$a\rightarrow b\rightarrow c$的简单路径
+				\item 时间复杂度：$O(n+m)$
+			\end{enumerate}
 	 	 	\lstinputlisting{图论/圆方树.cpp}
 	 	 	
 		\subsection{K短路}
+			\noindent\begin{enumerate}
+				\item 利用A*算法，以估价函数值优先搜索，第$k$次访问某结点的路径即$k$短路
+				\item 时间复杂度：$O(nk\log n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{图论/K短路.cpp}
 	 	 	
+		\subsection{Dinic算法}
+			\noindent\begin{enumerate}
+				\item 求有向网络最大流/最小割，可应用于二分图最大匹配
+				\item \texttt{cap}表示残量，\texttt{cap}为$0$的边满流
+				\item 时间复杂度：最差$O(n^2m)$/二分图匹配$O(m\sqrt{n})$
+			\end{enumerate}
+	 	 	\lstinputlisting{图论/Dinic算法.cpp}
+	 	 	
 		\subsection{SSP算法}
+			\noindent\begin{enumerate}
+				\item 求最小费用最大流
+				\item 无法处理负环，需要提前排除
+				\item 时间复杂度：$O(nmF)$（伪多项式，与最大流有关）
+			\end{enumerate}
 	 	 	\lstinputlisting{图论/SSP算法.cpp}
 	 	 	
 		\subsection{原始对偶算法}
+			\noindent\begin{enumerate}
+				\item 求最小费用最大流
+				\item 无法处理负环，需要提前排除
+				\item 时间复杂度：$O(mF\log m)$（伪多项式，与最大流有关）
+			\end{enumerate}
 	 	 	\lstinputlisting{图论/原始对偶算法.cpp}
 	 	 	
 		\subsection{Prim算法}
+			\noindent\begin{enumerate}
+				\item 选点法最小生成树，适用于稠密图
+				\item 注意特判图不连通的情况
+				\item 时间复杂度：$O(n^2)$
+			\end{enumerate}
 	 	 	\lstinputlisting{图论/Prim算法.cpp}
 	 	 	
 		\subsection{Kruskal算法}
+			\noindent\begin{enumerate}
+				\item 选边法最小生成树，适用于稀疏图
+				\item 注意特判图不连通的情况
+				\item 时间复杂度：$O(m\log m)$
+			\end{enumerate}
 	 	 	\lstinputlisting{图论/Kruskal算法.cpp}
 	 	 	
 		\subsection{Kruskal重构树}
+			\noindent\begin{enumerate}
+				\item 用于解决最小瓶颈路问题
+				\item 时间复杂度：建立$O(n)$/查询$O(\log n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{图论/Kruskal重构树.cpp}
 	 	 	
-	 	\subsection{Hierholzer算法}
-	 	 	\lstinputlisting{图论/Hierholzer算法.cpp}
-	 	 	
 	\section{计算几何}
-		\subsection{整数平面坐标}
-	 	 	\lstinputlisting{计算几何/整数平面坐标.cpp}
+		\subsection{二维整数坐标相关}
+	 	 	\lstinputlisting{计算几何/二维整数坐标相关.cpp}
 	 	 	
-		\subsection{浮点数平面坐标}
-	 	 	\lstinputlisting{计算几何/浮点数平面坐标.cpp}
+		\subsection{二维浮点数坐标相关}
+	 	 	\lstinputlisting{计算几何/二维浮点数坐标相关.cpp}
 	
 	\section{杂项算法}
 		\subsection{普通莫队算法}
+			\noindent\begin{enumerate}
+				\item 时间复杂度：$O((n+m)\sqrt{n})$
+			\end{enumerate}
 	 	 	\lstinputlisting{杂项算法/普通莫队算法.cpp}
 	 	 	
 	 	\subsection{带修改莫队算法}
+			\noindent\begin{enumerate}
+				\item 时间复杂度：$n,m,t$同级时$O(n^{\frac{5}{3}})$
+			\end{enumerate}
 	 	 	\lstinputlisting{杂项算法/带修改莫队算法.cpp}
 	 	 	
 	 	\subsection{莫队二次离线}
+			\noindent\begin{enumerate}
+				\item 莫队转移超过$O(1)$时，将所有转移离线并利用贡献可拆分性快速预处理
+				\item 时间复杂度：$O(n\sqrt{n})$
+			\end{enumerate}
 	 	 	\lstinputlisting{杂项算法/莫队二次离线.cpp}
 	 	 	
 	 	\subsection{整体二分}
+			\noindent\begin{enumerate}
+				\item 在答案值域上将多个需要二分解决的询问划分到两个区间中
+				\item 注意分到右半区间的询问目标值要削减
+				\item 时间复杂度：$O(q\log m)$
+			\end{enumerate}
 	 	 	\lstinputlisting{杂项算法/整体二分.cpp}
 	 	 	
 	 	\subsection{三分}
+			\noindent\begin{enumerate}
+				\item 函数必须严格凸/严格凹
+				\item 时间复杂度：$O(\log n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{杂项算法/三分.cpp}
 	 	 	
 	 	\subsection{离散化}
+			\noindent\begin{enumerate}
+				\item 注意下标从0开始还是1开始
+				\item 时间复杂度：$O(\log n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{杂项算法/离散化.cpp}
 	 	 	
 	 	\subsection{快速排序}
+			\noindent\begin{enumerate}
+				\item 两倍常数，但跳过所有与基准相等的值
+				\item 时间复杂度：$O(n\log n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{杂项算法/快速排序.cpp}
 	 	 	
  	 	\subsection{枚举集合}
+			\noindent\begin{enumerate}
+				\item 时间复杂度：跳转$O(1)$
+			\end{enumerate}
 	 	 	\lstinputlisting{杂项算法/枚举集合.cpp}
 	 	 	
 	 	\subsection{CDQ分治+CDQ分治=多维偏序}
+			\noindent\begin{enumerate}
+				\item $n$维偏序需要$n$层CDQ分治
+				\item 第$i$层CDQ将第$i$维降为二进制，同时将整个区间按第$i+1$维归并排序，然后调用第$i+1$层CDQ，第$n-1$层CDQ递归将左右分别按第$n$维排序，再用双指针按照第$n$维大小归并，同时计算左部前$n-2$维全$0$元素对右部前$n-2$维全$1$元素的贡献
+				\item 其余注意事项见“CDQ分治+数据结构=多维偏序”
+				\item 时间复杂度：$O(nd\log^{d-1}n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{杂项算法/CDQ分治+CDQ分治=多维偏序.cpp}
 
 		\subsection{CDQ分治+数据结构=多维偏序}
+			\noindent\begin{enumerate}
+				\item DP时贡献有顺序要求，分治的顺序为：解决左半、合并、解决右半
+				\item 注意小于等于和小于的情况做法细节不同
+				\item 根据需要进行离散化和去重
+				\item 时间复杂度：$O(n\log^{d-1}n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{杂项算法/CDQ分治+数据结构=多维偏序.cpp}
 	
 	\section{博弈论}
 		\subsection{Fibonacci博弈}
+			\noindent\begin{enumerate}
+				\item 有一堆石子，两人轮流取。先手第一次不能直接取完。每次至少取一个，但最多取上一个人的两倍。取走最后一个石子的人获胜
+				\item 结论：是斐波那契数则先手必败，否则先手必胜
+				\item 时间复杂度：$O(\log n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{博弈论/Fibonacci博弈.cpp}
 	 	 	
 		\subsection{Wythoff博弈}
+			\noindent\begin{enumerate}
+				\item 有两堆石子，两人轮流取。每次可以在一堆中取任意个石子或在两堆中取同样多的任意个石子，取走最后一个石子的人获胜
+				\item 结论：是黄金分割数则先手必败，否则先手必胜
+				\item x和y极大时需要注意精度问题
+				\item 时间复杂度：$O(1)$
+			\end{enumerate}
 	 	 	\lstinputlisting{博弈论/Wythoff博弈.cpp}
 	 	 	
 		\subsection{Green Hackenbush博弈}
+			\noindent\begin{enumerate}
+				\item 版本1：有一棵有根树，两人轮流选择一个子树删除，删除根结点的人失败
+				\item 结论1：叶结点SG值为0，其他结点SG值为所有邻接点SG值+1的异或和
+				\item 版本2：有一颗有根树，两人轮流删除一条边以及不与根相连的部分，无边可删的人失败
+				\item 结论2：叶结点父边SG值为1，中间结点父边SG值为所有邻接边SG值异或和+1
+				\item 时间复杂度：$O(n)$
+			\end{enumerate}
 	 	 	\lstinputlisting{博弈论/Green Hackenbush博弈.cpp}
 
 

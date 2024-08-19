@@ -1,14 +1,12 @@
-/*******************************************************************
-* 时间复杂度：O(1)
-* 说明：x 不能超过 O(p^2)，保险起见最好最后再模一次
-*******************************************************************/
 struct BarretReduction
 {
     ll m, p;
-    void init(int pp)
+    void init(int mod)
     {
-        m = ((__int128)1 << 64) / pp;
-        p = pp;
+        m = ((__int128)1 << 64) / mod;
+        p = mod;
     }
     ll operator()(ll x) { return x - ((__int128(x) * m) >> 64) * p; }
 } br;
+
+ll qmod(ll a, ll b, ll mod) { return a * b - ll(ld(a) / mod * b + 1e-8) * mod; }

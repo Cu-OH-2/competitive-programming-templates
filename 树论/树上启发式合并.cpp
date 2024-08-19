@@ -1,9 +1,3 @@
-/*******************************************************************
-* 时间复杂度：O(nlogn)(*状态更新复杂度)
-* 说明：
-* 1. 维护一个用于得出答案的状态，离线预处理每个子树的答案
-* 2. 用dfn序代替递归的贡献计算和清除可以优化常数
-*******************************************************************/
 const int N = 100005;
 
 vector<int> node[N];
@@ -37,9 +31,9 @@ struct DsuOnTree
         }
         ll ans() { return mp.rbegin()->second; }
     } state;
-    vector<int> big; //每个结点的重子
-    vector<int> sz; //每个子树的大小
-    vector<ll> ans; //每个子树的答案
+    vector<int> big; // 每个结点的重子
+    vector<int> sz; // 每个子树的大小
+    vector<ll> ans; // 每个子树的答案
     const int root = 1;
 
     DsuOnTree()
@@ -60,7 +54,7 @@ struct DsuOnTree
         }
         return;
     }
-    void del(int x, int p) //删除子树贡献
+    void del(int x, int p) // 删除子树贡献
     {
         state.del(a[x]);
         for (auto e : node[x])
@@ -70,7 +64,7 @@ struct DsuOnTree
         }
         return;
     }
-    void add(int x, int p) //计算子树贡献
+    void add(int x, int p) // 计算子树贡献
     {
         state.add(a[x]);
         for (auto e : node[x])
@@ -82,20 +76,20 @@ struct DsuOnTree
     }
     void dfs(int x, int p, bool keep)
     {
-        for (auto e : node[x]) //计算轻子子树答案
+        for (auto e : node[x]) // 计算轻子子树答案
         {
             if (e == big[x] || e == p) continue;
             dfs(e, x, 0);
         }
-        if (big[x]) dfs(big[x], x, 1); //计算重子子树答案和贡献
-        for (auto e : node[x]) //计算轻子子树贡献
+        if (big[x]) dfs(big[x], x, 1); // 计算重子子树答案和贡献
+        for (auto e : node[x]) // 计算轻子子树贡献
         {
             if (e == big[x] || e == p) continue;
             add(e, x);
         }
-        state.add(a[x]); //计算自己贡献
-        ans[x] = state.ans(); //计算答案
-        if (keep == 0) del(x, p); //删除子树贡献
+        state.add(a[x]); // 计算自己贡献
+        ans[x] = state.ans(); // 计算答案
+        if (keep == 0) del(x, p); // 删除子树贡献
         return;
     }
     void work()

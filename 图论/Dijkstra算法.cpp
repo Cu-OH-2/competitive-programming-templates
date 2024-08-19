@@ -1,24 +1,17 @@
-/*******************************************************************
-* 时间复杂度：朴素O(N^2)/堆优化O(MlogM)
-* 说明：
-* 1.只适用于非负边权
-* 2.稀疏图用堆优化，稠密图用朴素
-* 3.注意处理图不连通的情况（dis==INFLL）
-*******************************************************************/
 const int N = 100005;
 const ll INFLL = 0x3f3f3f3f3f3f3f3f;
 
-struct Edge {int to, v;};
+struct Edge { int to, v; };
 
 vector<Edge> node[N];
 
 struct Dijkstra
 {
-    struct NodeInfo
+    struct Node
     {
         int id;
         ll d;
-        bool operator < (const NodeInfo& p1) const
+        bool operator < (const Node& p1) const
         {
             return d > p1.d;
         }
@@ -35,9 +28,9 @@ struct Dijkstra
         dis.resize(sz + 1, INFLL);
     }
 
-    void workO(int s)
+    void workO(int s) // 堆优化
     {
-        priority_queue<NodeInfo> pq;
+        priority_queue<Node> pq;
         dis[s] = 0;
         pq.push({ s,0 });
         while (pq.size())
@@ -46,7 +39,7 @@ struct Dijkstra
             pq.pop();
             if (vis[now] == 0)
             {
-                vis[now] = 1; //被取出一定是最短路
+                vis[now] = 1; // 被取出一定是最短路
                 for (auto e : node[now])
                 {
                     if (vis[e.to] == 0 && dis[e.to] > dis[now] + e.v)
@@ -60,7 +53,7 @@ struct Dijkstra
         return;
     }
 
-    void workS(int s)
+    void workS(int s) // 朴素
     {
         auto take = [&](int x)
         {

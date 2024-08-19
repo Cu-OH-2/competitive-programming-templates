@@ -1,20 +1,7 @@
-/*******************************************************************
-* 时间复杂度：O(nlogn)
-* 说明：
-* 1.解模数互质的线性同余方程组，一定有解
-* 2.爆longlong时可能需要快速乘（模数过大也可能爆精度）
-*******************************************************************/
 struct CRT
 {
     vector<pair<ll, ll>> f;
-    inline ll norm(ll x, ll mod) { return (x % mod + mod) % mod; }
-    ll qmul(ll a, ll b, ll mod)
-    {
-        //a = norm(a, mod);
-        //b = norm(b, mod);
-        ll res = a * b - (ll)((ld)a / mod * b + 1e-8) * mod;
-        return norm(res, mod);
-    }
+    inline ll nrm(ll x, ll mod) { return (x % mod + mod) % mod; }
     ll exgcd(ll a, ll b, ll& x, ll& y)
     {
         if (b == 0)
@@ -31,7 +18,7 @@ struct CRT
     {
         ll x, y;
         exgcd(a, mod, x, y);
-        return norm(x, mod);
+        return nrm(x, mod);
     }
     void insert(ll r, ll m)
     {
@@ -48,6 +35,6 @@ struct CRT
             ll c = m * inv(m, e.second);
             ans += c * e.first;
         }
-        return norm(ans, mul);
+        return nrm(ans, mul);
     }
 };

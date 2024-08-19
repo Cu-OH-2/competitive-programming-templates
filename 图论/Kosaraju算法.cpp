@@ -1,7 +1,3 @@
-/*******************************************************************
-* 时间复杂度：O(N+M)
-* 说明：有向图强连通分量
-*******************************************************************/
 const int N = 10005;
 
 vector<int> node[N];
@@ -11,7 +7,7 @@ struct Kosaraju
     int sz, index = 0;
     vector<int> vis, ord;
     vector<vector<int>> rev;
-    vector<int> id; //强连通分量编号
+    vector<int> id; // 强连通分量编号
     Kosaraju(int x)
     {
         sz = x;

@@ -1,10 +1,3 @@
-/*******************************************************************
-* 时间复杂度: 建立O(N)/查询O(logN)
-* 说明: 
-* 1.用于解决最小瓶颈路问题
-* 2.考虑了初始图不连通的问题
-* 3.注意n=1特殊情况（不用建树）
-*******************************************************************/
 const int N = 100005;
 
 struct DSU
@@ -17,7 +10,7 @@ struct DSU
         return;
     }
     int find(int id) { return f[id] == id ? id : f[id] = find(f[id]); }
-    void attach(int x, int y) //将fx连向fy，不按秩合并
+    void attach(int x, int y) // 将fx连向fy，不按秩合并
     {
         int fx = find(x), fy = find(y);
         f[fx] = fy;
@@ -89,9 +82,9 @@ struct Edge
 
 struct KrsRebTree
 {
-    int size; //当前结点数，最多为n*2-1
-    vector<vector<int>> son; //子结点
-    vector<ll> val; //点权
+    int size; // 当前结点数，最多为n*2-1
+    vector<vector<int>> son; // 子结点
+    vector<ll> val; // 点权
     LCA lca;
     DSU dsu;
 
@@ -117,7 +110,7 @@ struct KrsRebTree
         lca.init(size);
         for (int i = n + 1; i <= size; ++i)
         {
-            if (dsu.find(i) == i) lca.dfs(i, son); //对所有树的根dfs
+            if (dsu.find(i) == i) lca.dfs(i, son); // 对所有树的根dfs
         }
         lca.build(size);
         return;

@@ -1,11 +1,4 @@
-/*******************************************************************
-* 时间复杂度：O(n+m)
-* 说明：
-* 1.求有向图强连通分量+缩点
-* 2.求无向图点双连通分量和割点
-* 3.求无向图边双连通分量和割边
-*******************************************************************/
-struct SCC
+struct SCC // 有向图强连通分量+缩点
 {
     int sz, cnt, ord;
     stack<int> stk;
@@ -71,7 +64,7 @@ struct SCC
     }
 };
 
-struct VBCC
+struct VBCC // 无向图点双连通分量和割点
 {
     int sz, ord;
     stack<int> stk;
@@ -132,7 +125,7 @@ struct VBCC
     }
 };
 
-struct EBCC
+struct EBCC // 无向图边双连通分量和割边
 {
     int sz, ord;
     vector<int> dfn, low, tag, vis;

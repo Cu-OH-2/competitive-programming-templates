@@ -1,9 +1,3 @@
-/*******************************************************************
-* 时间复杂度：建立O(n)/修改O(log^2n)/查询O(logn)
-* 说明：
-* 1.谨慎使用，注意浮点数精度和结点初始化问题
-* 2.标记永久化，整条链每一层的值都可能是答案
-*******************************************************************/
 const int N = 100005;
 const double EPS = 1e-9;
 
@@ -82,17 +76,7 @@ struct LCSegTree
     int query(int src, int x)
     {
         if (tree[src].lef == tree[src].rig) return tree[src].id;
-        if (x <= tree[src << 1].rig)
-        {
-            int r = query(src << 1, x);
-            if (compare(r, tree[src].id, x)) return tree[src].id;
-            else return r;
-        }
-        else
-        {
-            int r = query(src << 1 | 1, x);
-            if (compare(r, tree[src].id, x)) return tree[src].id;
-            else return r;
-        }
+        int r = query(src << 1 | (x >= tree[src << 1 | 1].lef), x);
+        return compare(r, tree[src].id, x) ? tree[src].id : r;
     }
 };

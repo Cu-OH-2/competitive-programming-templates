@@ -1,7 +1,3 @@
-/*******************************************************************
-* 时间复杂度: ?
-* 说明: 整数平面坐标相关操作
-*******************************************************************/
 const ll INF = 1e18;
 
 struct P
@@ -21,7 +17,7 @@ ll sqr(ll x) { return x * x; }
 ll dis2(const P& p1, const P& p2) { return (p1 - p2).len2(); }
 ll cross(const P& p1, const P& p2) { return p1.x * p2.y - p2.x * p1.y; }
 
-ll closest(vector<P>& p)
+ll closest(vector<P>& p) // 最近点对，P7883
 {
     sort(p.begin(), p.end(), [](auto x, auto y) { return x.x < y.x; });
     function<ll(int, int)> work = [&](int lef, int rig)
@@ -56,8 +52,9 @@ ll closest(vector<P>& p)
     return work(0, p.size());
 }
 
-ll diameter(vector<P>& p) // counterclockwise
+ll diameter(vector<P>& p) // 凸包直径
 {
+    // m >= 3 & counterclockwise
     int m = p.size(), k = 1;
     ll res = 0;
     for (int i = 0; i < m; ++i)
@@ -70,8 +67,9 @@ ll diameter(vector<P>& p) // counterclockwise
     return res;
 }
 
-vector<P> convex(vector<P>& p) // least points
+vector<P> convex(vector<P>& p) // 求凸包
 {
+    // m >= 2, least points & counterclockwise
     int m = p.size();
     sort(p.begin(), p.end(),
          [](auto x, auto y)
@@ -95,5 +93,14 @@ vector<P> convex(vector<P>& p) // least points
         stk.push_back(i);
     }
     for (int i = 1; i + 1 < stk.size(); ++i) res.push_back(p[stk[i]]);
+    return res;
+}
+
+ll area(vector<P>& p) // 多边形面积
+{
+    // counterclockwise
+    int m = p.size();
+    ll res = 0;
+    for (int i = 1; i < m - 1; ++i) res += cross(p[i] - p[0], p[(i + 1) % m] - p[0]);
     return res;
 }

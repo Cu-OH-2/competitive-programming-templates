@@ -1,10 +1,3 @@
-/*******************************************************************
-* 时间复杂度：O(N+M)
-* 说明：
-* 1. 以P4782为例
-* 2. 按照推导关系建有向图，判断是否有两个矛盾点在同一强连通分量中
-* 3. 建图[1,n]+[n+1,2n]后调用大小为n的ts，res是一组合法构造
-*******************************************************************/
 const int N = 2000005;
 
 vector<int> node[N];
@@ -13,17 +6,17 @@ struct Tarjan
 {
     int sz, cnt, ord;
     stack<int> stk;
-    vector<vector<int>> g; //新图
+    vector<vector<int>> g; // 新图
     vector<int> dfn, low, id, val;
     Tarjan(int x)
     {
-        sz = x; //点数
-        cnt = 0; //强连通分量个数
-        ord = 0; //时间戳
-        dfn.resize(sz + 1); //dfs序
-        low.resize(sz + 1); //能到达的最小dfn
-        id.resize(sz + 1); //对应的强连通分量编号
-        val.resize(sz + 1); //新图点权
+        sz = x; // 点数
+        cnt = 0; // 强连通分量个数
+        ord = 0; // 时间戳
+        dfn.resize(sz + 1); // dfs序
+        low.resize(sz + 1); // 能到达的最小dfn
+        id.resize(sz + 1); // 对应的强连通分量编号
+        val.resize(sz + 1); // 新图点权
     }
     void dfs(int x)
     {
@@ -41,7 +34,7 @@ struct Tarjan
                 low[x] = min(low[x], low[e]);
             }
         }
-        if (dfn[x] == low[x]) //x为强连通分量的根
+        if (dfn[x] == low[x]) // x为强连通分量的根
         {
             cnt++;
             while (dfn[stk.top()] != low[stk.top()])
@@ -105,7 +98,7 @@ struct TwoSat
     }
 };
 
-void solve()
+void solve() // P4782
 {
     ll n, m;
     cin >> n >> m;

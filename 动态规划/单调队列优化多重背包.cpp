@@ -1,13 +1,9 @@
-/*******************************************************************
-* 时间复杂度: O(nm)
-* 说明: dp[j]只有可能从dp[j-k*w[i]]转移来
-*******************************************************************/
 const int N = 100005;
 const int M = 40005;
 
-ll n, m; //种数、容积
-ll v[N], w[N], k[N]; //价值、体积、数量
-ll dp[M]; //使用i容积的最大价值
+ll n, m; // 种数、容积
+ll v[N], w[N], k[N]; // 价值、体积、数量
+ll dp[M]; // 使用i容积的最大价值
 
 struct Node
 {
@@ -21,8 +17,8 @@ void solve()
     for (int i = 1; i <= n; ++i)
     {
         vector<deque<Node>> dq(w[i]);
-        auto key = [&](int j) { return dp[j] - j / w[i] * v[i]; }; //dp[j]在比较基准下的指标
-        auto join = [&](int j) //dp[j]入队
+        auto key = [&](int j) { return dp[j] - j / w[i] * v[i]; }; // dp[j]在比较基准下的指标
+        auto join = [&](int j) // dp[j]入队
         {
             auto& q = dq[j % w[i]];
             while (q.size() && key(j) >= q.back().key) q.pop_back();

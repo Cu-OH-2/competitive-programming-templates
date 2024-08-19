@@ -1,16 +1,4 @@
-/*******************************************************************
-* 时间复杂度：所有操作O(log(seglen))
-* 说明：
-* 1.建空根：可以不靠离散化维护大区间，但要谨慎考虑空间复杂度。
-* 2.主席树维护区间值域上性质：用可持久化权值线段树维护值域，将序列元素逐
-*   个插入，由前缀和性质，区间值域上性质蕴含在新树和旧树的差之中。
-* 3.标记永久化：路过结点时标记不下放，也不通过子结点更新，而是直接改变其
-*   值；向下搜索时记录累积标记值并在最后作用（因此assign()在维护最值时
-*   无效）。
-* 4.区间第k大也可以整体二分/划分树。
-* 5.若维护区间超过int，记得把32换成64。
-*******************************************************************/
-struct PerSegTree
+struct PerSegTree // 维护区间和，支持区间加减
 {
     struct Node
     {
@@ -36,7 +24,7 @@ struct PerSegTree
         }
         return now;
     }
-    void init(ll l, ll r, int cnt, ll a[]) //建初始树
+    void init(ll l, ll r, int cnt, ll a[]) // 建初始树
     {
         size = 0;
         L = l, R = r;
@@ -44,28 +32,13 @@ struct PerSegTree
         root.push_back(_build(L, R, a));
         return;
     }
-    void init(ll l, ll r, int cnt) //建一个空根
+    void init(ll l, ll r, int cnt) // 建一个空根
     {
         size = 1;
         L = l, R = r;
         tree.resize(cnt * 32 + 5);
         root.push_back(0);
         return;
-    }
-    void assign(int ver, ll pos, ll val) { root.push_back(_assign(root[ver], L, R, pos, val, 0)); }
-    int _assign(int src, ll l, ll r, ll pos, ll val, ll tag)
-    {
-        int now = size++;
-        tree[now] = tree[src];
-        tag += tree[now].tag;
-        if (l == r) tree[now].val = val - tag;
-        else
-        {
-            ll m = l + (r - l) / 2;
-            if (pos <= m) tree[now].ls = _assign(tree[now].ls, l, m, pos, val, tag);
-            else tree[now].rs = _assign(tree[now].rs, m + 1, r, pos, val, tag);
-        }
-        return now;
     }
     void modify(int ver, ll lef, ll rig, ll val) { root.push_back(_modify(root[ver], L, R, lef, rig, val)); }
     int _modify(int src, ll l, ll r, ll lef, ll rig, ll val)

@@ -1,10 +1,3 @@
-/*******************************************************************
-* 时间复杂度：O(nlogn)
-* 说明：
-* 1. 判断有根树同构
-* 2. 无根树可通过找重心转换为有根树，若有两个重心需要同时考虑。
-* 3. 不同的树需要共用同一套mp
-*******************************************************************/
 struct TreeHash
 {
     int n, root;
@@ -58,7 +51,10 @@ struct TreeHash
         int mnn = n;
         getD(root, -1, sz, d);
         for (int i = 1; i <= n; ++i) mnn = min(mnn, d[i]);
-        for (int i = 1; i <= n; ++i) if (d[i] == mnn) res.push_back(i);
+        for (int i = 1; i <= n; ++i) 
+        {
+            if (d[i] == mnn) res.push_back(i);
+        }
         return res;
     }
 

@@ -1,7 +1,3 @@
-/*******************************************************************
-* 时间复杂度: ?
-* 说明: 浮点数平面坐标相关操作
-*******************************************************************/
 using ld = long double;
 
 constexpr ld INF = 1e100;
@@ -33,7 +29,7 @@ ld dis(const P& p1, const P& p2) { return (p1 - p2).len(); }
 ld cross(const P& p1, const P& p2) { return p1.x * p2.y - p2.x * p1.y; }
 ld area(const P& p1, const P& p2, const P& p3) { return fabsl(cross(p2 - p1, p3 - p1)) / 2; }
 
-ld closest(vector<P>& p) // P1429
+ld closest(vector<P>& p) // 最近点对，P1429
 {
     sort(p.begin(), p.end(), [](auto x, auto y) { return x.x < y.x; });
     function<ld(int, int)> work = [&](int lef, int rig)
@@ -68,7 +64,7 @@ ld closest(vector<P>& p) // P1429
     return work(0, p.size());
 }
 
-array<ld, 3> circle(const P& p1, const P& p2, const P& p3)
+array<ld, 3> circle(const P& p1, const P& p2, const P& p3) // 三点定圆
 {
     P a(2 * (p1.x - p2.x), 2 * (p1.x - p3.x));
     P b(2 * (p1.y - p2.y), 2 * (p1.y - p3.y));
@@ -77,7 +73,7 @@ array<ld, 3> circle(const P& p1, const P& p2, const P& p3)
     return { o.x, o.y, dis(o, p1) };
 }
 
-array<ld, 3> circle(vector<P>& p)
+array<ld, 3> circle(vector<P>& p) // 最小圆覆盖
 {
     shuffle(p.begin(), p.end(), mt19937(time(0)));
     int m = p.size();
@@ -104,7 +100,7 @@ array<ld, 3> circle(vector<P>& p)
     return { c.x, c.y, r };
 }
 
-array<P, 4> rectangle(vector<P>& p)
+array<P, 4> rectangle(vector<P>& p) // 最小矩形覆盖
 {
     // convex & counterclockwise
     array<P, 4> res{};
