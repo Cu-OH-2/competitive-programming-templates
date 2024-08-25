@@ -75,7 +75,7 @@ struct SegTree // 维护区间和，无标记，仅支持单点修改
     struct Node
     {
         int lef, rig;
-        int val;
+        ll val;
     };
     vector<Node> tree;
 
