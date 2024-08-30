@@ -69,8 +69,7 @@ struct SegTree // 维护区间和，支持区间加减
         return res;
     }
 };
-
-struct SegTree // 维护区间和，无标记，仅支持单点修改
+struct SegTree // 维护区间和，支持单点修改（无标记）/二分查找第一个区间和大于等于x的右端点
 {
     struct Node
     {
@@ -120,7 +119,32 @@ struct SegTree // 维护区间和，无标记，仅支持单点修改
         if (rig >= tree[src << 1 | 1].lef) res += query(src << 1 | 1, lef, rig);
         return res;
     }
+
+    int bis(int src, int lef, ll& tar)
+    {
+        if (tree[src].lef == lef)
+        {
+            if (tree[src].val < tar)
+            {
+                tar -= tree[src].val;
+                return 0;
+            }
+            if (tree[src].rig == lef) return lef;
+            if (tree[src << 1].val >= tar) return bis(src << 1, lef, tar);
+            tar -= tree[src << 1].val;
+            lef = tree[src << 1 | 1].lef;
+            return bis(src << 1 | 1, lef, tar);
+        }
+        if (lef <= tree[src << 1].rig)
+        {
+            int res = bis(src << 1, lef, tar);
+            if (res) return res;
+            lef = tree[src << 1 | 1].lef;
+        }
+        return bis(src << 1 | 1, lef, tar);
+    }
 };
+
 
 struct SegTree // 维护最大值，支持区间加减/二分查询第一个大于等于x的数
 {
@@ -190,13 +214,23 @@ struct SegTree // 维护最大值，支持区间加减/二分查询第一个大�
         return res;
     }
 
-    int bis(int src, ll tar)
+    int bis(int src, int lef, ll tar)
     {
         pushdown(src);
-        if(tree[src].val < tar) return tree[src].rig + 1;
-        if(tree[src].lef == tree[src].rig) return tree[src].lef;
-        if(tree[src << 1].val + tree[src << 1].tag >= tar) return bis(src << 1, tar);
-        else return bis(src << 1 | 1, tar);
+        if (tree[src].lef == lef)
+        {
+            if (tree[src].val < tar) return 0;
+            if (tree[src].rig == lef) return lef;
+            if ((tree[src << 1].val + tree[src << 1].tag) >= tar) return bis(src << 1, lef, tar);
+            else return query(src << 1 | 1, tree[src << 1 | 1].lef, tar);
+        }
+        if (lef <= tree[src << 1].rig)
+        {
+            int res = bis(src << 1, lef, tar);
+            if (res) return res;
+            lef = tree[src << 1 | 1].lef;
+        }
+        return bis(src << 1 | 1, lef, tar);
     }
 };
 
@@ -268,12 +302,22 @@ struct SegTree // 维护最大值，支持区间取最大值/二分查询第一�
         return res;
     }
 
-    int bis(int src, ll tar)
+    int bis(int src, int lef, ll tar)
     {
         pushdown(src);
-        if (tree[src].val < tar) return tree[src].rig + 1;
-        if (tree[src].lef == tree[src].rig) return tree[src].lef;
-        if (max(tree[src << 1].val, tree[src << 1].tag) >= tar) return bis(src << 1, tar);
-        else return bis(src << 1 | 1, tar);
+        if (tree[src].lef == lef)
+        {
+            if (tree[src].val < tar) return 0;
+            if (tree[src].rig == lef) return lef;
+            if (max(tree[src << 1].val, tree[src << 1].tag) >= tar) return bis(src << 1, lef, tar);
+            else return query(src << 1 | 1, tree[src << 1 | 1].lef, tar);
+        }
+        if (lef <= tree[src << 1].rig)
+        {
+            int res = bis(src << 1, lef, tar);
+            if (res) return res;
+            lef = tree[src << 1 | 1].lef;
+        }
+        return bis(src << 1 | 1, lef, tar);
     }
 };
