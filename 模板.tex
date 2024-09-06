@@ -562,7 +562,7 @@
 		\subsection{SSP算法}
 			\noindent\begin{enumerate}
 				\item 求最小费用最大流
-				\item 无法处理负环，需要提前排除
+				\item 无法处理负环，需要用强制满流法预处理：先将负权边手动置为满流（反向建边即可）并计入答案，再引入虚拟源点和虚拟汇点，使虚拟源点连向终点，起点连向虚拟汇点，跑一遍最大流（注意清空流量）
 				\item 时间复杂度：$O(nmF)$（伪多项式，与最大流有关）
 			\end{enumerate}
 	 	 	\lstinputlisting{图论/SSP算法.cpp}
@@ -570,7 +570,7 @@
 		\subsection{原始对偶算法}
 			\noindent\begin{enumerate}
 				\item 求最小费用最大流
-				\item 无法处理负环，需要提前排除
+				\item 对负环的处理同SSP算法
 				\item 时间复杂度：$O(mF\log m)$（伪多项式，与最大流有关）
 			\end{enumerate}
 	 	 	\lstinputlisting{图论/原始对偶算法.cpp}
