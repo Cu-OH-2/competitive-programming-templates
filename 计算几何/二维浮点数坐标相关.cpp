@@ -29,6 +29,13 @@ ld dis(const P& p1, const P& p2) { return (p1 - p2).len(); }
 ld cross(const P& p1, const P& p2) { return p1.x * p2.y - p2.x * p1.y; }
 ld area(const P& p1, const P& p2, const P& p3) { return fabsl(cross(p2 - p1, p3 - p1)) / 2; }
 
+P intersect(const P& p1, const P& p2, const P& p3, const P& p4) // 直线p1p2和p3p4的交点，需确保交点唯一存在
+{
+    ld s1 = cross(p2 - p1, p3 - p1);
+    ld s2 = cross(p2 - p1, p4 - p1);
+    return P((p3.x * s2 - p4.x * s1) / (s2 - s1), (p3.y * s2 - p4.y * s1) / (s2 - s1));
+}
+
 ld closest(vector<P>& p) // 最近点对，P1429
 {
     sort(p.begin(), p.end(), [](auto x, auto y) { return x.x < y.x; });
