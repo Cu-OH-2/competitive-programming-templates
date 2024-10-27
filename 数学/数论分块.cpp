@@ -1,15 +1,16 @@
 void solve()
 {
-    ll n, k;
-    cin >> n >> k;
-    ll ans = 0;
-    for (ll lef = 1, rig; lef <= n; lef = rig + 1) // 分块
+    ll n;
+    cin >> n;
+    for (ll lef = 1, rig; lef <= n; lef = rig + 1)
     {
-        if (k >= lef) rig = min(n, k / (k / lef));
-        else rig = n; // 该区间大于k（余数都为k）
-        ll div = k / lef, len = rig - lef + 1;
-        ans += k * len - div * (lef + rig) * len / 2;
+        rig = n / (n / lef);
     }
-    cout << ans << '\n';
-    return 0;
+    for (ll lef = 1, rig; lef <= n; lef = rig + 1)
+    {
+        ll ud = (n + lef - 1) / lef;
+        if (ud == 1) rig = n;
+        else rig = (n - 1) / ((n + lef - 1) / lef - 1) + 1;
+    }
+    return;
 }
