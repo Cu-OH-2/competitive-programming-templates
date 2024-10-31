@@ -49,8 +49,11 @@ struct HLD
         dfn[x] = ++ord;
         rnk[ord] = x;
         if (hson[pa[x]] == x) top[x] = top[pa[x]];
-        for (auto e : node[x]) if (e == hson[x]) decom(e);
-        for (auto e : node[x]) if (e != pa[x] && e != hson[x]) decom(e);
+        if (hson[x]) decom(hson[x]);
+        for (auto e : node[x]) 
+        {
+            if (e != pa[x] && e != hson[x]) decom(e);
+        }
         return;
     }
 
@@ -63,5 +66,60 @@ struct HLD
         }
         if (dep[u] < dep[v]) return u;
         else return v;
+    }
+};
+
+struct LCD
+{
+    vector<int> pa, dep, h, hson;
+    vector<int> top, dfn, rnk;
+    int ord = 0;
+ 
+    LCD(int x, int root)
+    {
+        pa.resize(x + 1);
+        dep.resize(x + 1);
+        h.resize(x + 1);
+        hson.resize(x + 1);
+        top.resize(x + 1);
+        dfn.resize(x + 1);
+        rnk.resize(x + 1);
+        build(root);
+        decom(root);
+    }
+ 
+    void build(int x)
+    {
+        h[x] = 1;
+        int mxh = 0;
+        for (auto e : node[x])
+        {
+            if (e == pa[x]) continue;
+            pa[e] = x;
+            dep[e] = dep[x] + 1;
+            build(e);
+            h[x] = max(h[x], h[e] + 1);
+            if (h[e] > mxh)
+            {
+                mxh = h[e];
+                hson[x] = e;
+            }
+        }
+        return;
+    }
+ 
+    void decom(int x)
+    {
+        top[x] = x;
+        dfn[x] = ++ord;
+        rnk[ord] = x;
+        if (hson[pa[x]] == x) top[x] = top[pa[x]];
+        if (hson[x]) decom(hson[x]);
+        for (auto e : node[x])
+        {
+            if (e == pa[x] || e == hson[x]) continue;
+            decom(e);
+        }
+        return;
     }
 };
