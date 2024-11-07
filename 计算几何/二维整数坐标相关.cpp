@@ -96,11 +96,11 @@ vector<P> convex(vector<P>& p) // 求凸包
     return res;
 }
 
-ld area(vector<P>& p) // 多边形面积
+ll area(vector<P>& p) // 多边形面积的两倍
 {
     // counterclockwise
     int m = p.size();
     ll res = 0;
     for (int i = 1; i < m - 1; ++i) res += cross(p[i] - p[0], p[(i + 1) % m] - p[0]);
-    return res / 2;
+    return res;
 }
