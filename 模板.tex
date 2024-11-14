@@ -294,7 +294,7 @@
 	 		\noindent\begin{itemize}
 	 			\item 扩展欧几里得算法用于求解$ax+by=\gcd(a,b)$
 	 			\item 求出一组可行解$(x_0,y_0)$后，可得解集\\ $\left\{\left(x_0+k\frac{b}{\gcd(a,b)},y_0-k\frac{a}{\gcd(a,b)}\right)\right\}$
-	 			\item 求出的可行解不一定是最小正整数，但一定满足$|x_0|<b,|y_0|<a$
+	 			\item 求出的可行解$x$和$y$一定同时满足绝对值最小（异号），有$|x_0|<\frac{b}{\gcd(a,b)},|y_0|<\frac{a}{\gcd(a,b)}$
 	 			\item 求解$ax+by=c$时，可以先求解$ax+by=\gcd(a,b)$\\ 得到可行解$(x_0',y_0')$，此时原方程的可行解为\\ $\left(x_0=\frac{c}{\gcd(a,b)}x_0',y_0=\frac{c}{\gcd(a,b)}y_0'\right)$，解集依然为\\ $\left\{\left(x_0+k\frac{b}{\gcd(a,b)},y_0-k\frac{a}{\gcd(a,b)}\right)\right\}$
 	 			\item 扩展欧几里得算法还可以通过解同余方程$ax\equiv 1\pmod p$求乘法逆元，且只需要满足$a,p$互质，不需要$p$是质数
 		 		\item 时间复杂度：$O(\log)$
