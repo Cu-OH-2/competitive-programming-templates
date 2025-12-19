@@ -61,7 +61,7 @@ struct HLD
     {
         while (top[u] != top[v])
         {
-            if (dep[u] < dep[v]) v = pa[top[v]];
+            if (dep[top[u]] < dep[top[v]]) v = pa[top[v]];
             else u = pa[top[u]];
         }
         if (dep[u] < dep[v]) return u;
